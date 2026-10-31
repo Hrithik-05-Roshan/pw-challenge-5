@@ -213,13 +213,18 @@ html {
   outline-offset: 2px;
 }
 
-/* Touch targets >= 44px */
+/* Accessible touch targets for form controls and interactive buttons */
 button,
-a,
 input,
 select,
 textarea {
   min-height: 44px;
+}
+
+/* Ensure footer and list links are naturally compact */
+footer a,
+ul a {
+  min-height: auto;
 }
 
 /* Custom Scrollbars */

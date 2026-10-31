@@ -40,16 +40,16 @@ export function Footer() {
         {/* ======================================================== */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 pb-5 border-b border-slate-200/60 dark:border-white/5">
           {/* Brand & Mission */}
-          <div className="lg:col-span-6 space-y-3">
-            <Link href="/" className="inline-flex items-center gap-2.5 group">
-              <div className="flex h-9 w-9 items-center justify-center rounded-2xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-rose-500 text-white shadow-md shadow-indigo-500/25 group-hover:scale-105 group-hover:shadow-indigo-500/40 transition-all duration-200">
-                <Sparkles className="h-4.5 w-4.5" aria-hidden="true" />
+          <div className="lg:col-span-6 space-y-2.5">
+            <Link href="/" className="inline-flex items-center gap-2 group min-h-0">
+              <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-rose-500 text-white shadow-md shadow-indigo-500/25 group-hover:scale-105 transition-all duration-200">
+                <Sparkles className="h-4 w-4" aria-hidden="true" />
               </div>
               <div className="flex items-center gap-1.5">
-                <span className="font-editorial text-2xl font-bold tracking-tight text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                <span className="font-editorial text-xl font-bold tracking-tight text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
                   Gatherly
                 </span>
-                <span className="h-2 w-2 rounded-full bg-rose-500 inline-block animate-pulse" />
+                <span className="h-1.5 w-1.5 rounded-full bg-rose-500 inline-block animate-pulse" />
               </div>
             </Link>
 
@@ -59,26 +59,26 @@ export function Footer() {
             </p>
 
             {/* Trust Badges */}
-            <div className="flex flex-wrap items-center gap-2 pt-1 text-[11px]">
+            <div className="flex flex-wrap items-center gap-2 pt-0.5 text-[11px]">
               <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20 font-medium">
-                <ShieldCheck className="h-3 w-3" />
+                <ShieldCheck className="h-3 w-3 shrink-0" />
                 <span>100% Client-Side Isolated</span>
               </span>
               <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-indigo-500/10 text-indigo-700 dark:text-indigo-400 border border-indigo-500/20 font-medium">
-                <Lock className="h-3 w-3" />
+                <Lock className="h-3 w-3 shrink-0" />
                 <span>Zero-PII Storage</span>
               </span>
               <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/20 font-medium">
-                <CheckCircle2 className="h-3 w-3" />
+                <CheckCircle2 className="h-3 w-3 shrink-0" />
                 <span>Deterministic Math Engine</span>
               </span>
             </div>
           </div>
 
           {/* Newsletter / Concierge Digest */}
-          <div className="lg:col-span-6 space-y-3">
+          <div className="lg:col-span-6 space-y-2">
             <div>
-              <h3 className="font-editorial text-base font-bold text-slate-900 dark:text-white">
+              <h3 className="font-editorial text-sm font-bold text-slate-900 dark:text-white">
                 Bespoke Planning Digest
               </h3>
               <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
@@ -87,8 +87,8 @@ export function Footer() {
             </div>
 
             {subscribed ? (
-              <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 dark:text-emerald-300 text-xs font-semibold flex items-center gap-2">
-                <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-500" />
+              <div className="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 dark:text-emerald-300 text-xs font-semibold flex items-center gap-2">
+                <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-emerald-500" />
                 <span>You&apos;re subscribed to the Bespoke Planning Digest! Check your inbox soon.</span>
               </div>
             ) : (
@@ -118,49 +118,49 @@ export function Footer() {
         </div>
 
         {/* ======================================================== */}
-        {/* MIDDLE SEGMENT: 4 Well-Organized Structured Columns       */}
+        {/* MIDDLE SEGMENT: 4 Production-Grade Compact Columns        */}
         {/* ======================================================== */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 text-xs pt-1 pb-1">
           {/* Col 1: Journeys */}
-          <div className="space-y-2.5">
-            <h4 className="font-bold uppercase tracking-wider text-slate-900 dark:text-white text-[11px] flex items-center gap-1.5">
-              <Sparkles className="h-3 w-3 text-indigo-500" />
+          <div className="space-y-2">
+            <h4 className="font-bold uppercase tracking-wider text-slate-900 dark:text-white text-[11px] flex items-center gap-1.5 mb-1.5">
+              <Sparkles className="h-3 w-3 text-indigo-500 shrink-0" />
               <span>Journeys</span>
             </h4>
-            <ul className="space-y-1.5 text-slate-600 dark:text-slate-400">
+            <ul className="space-y-1">
               <li>
                 <Link
                   href="/onboarding"
-                  className="group flex items-center gap-1.5 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+                  className="group inline-flex items-center gap-1 text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors py-0.5 leading-snug min-h-0"
                 >
-                  <ChevronRight className="h-3 w-3 stroke-[2.5] text-indigo-500 transition-transform duration-200 group-hover:translate-x-1 shrink-0" />
+                  <ChevronRight className="h-3 w-3 stroke-[2.5] text-indigo-500 transition-transform duration-200 group-hover:translate-x-0.5 shrink-0" />
                   <span>Interactive Planning Wizard</span>
                 </Link>
               </li>
               <li>
                 <Link
                   href="/dashboard"
-                  className="group flex items-center gap-1.5 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+                  className="group inline-flex items-center gap-1 text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors py-0.5 leading-snug min-h-0"
                 >
-                  <ChevronRight className="h-3 w-3 stroke-[2.5] text-indigo-500 transition-transform duration-200 group-hover:translate-x-1 shrink-0" />
+                  <ChevronRight className="h-3 w-3 stroke-[2.5] text-indigo-500 transition-transform duration-200 group-hover:translate-x-0.5 shrink-0" />
                   <span>Celebration Workspaces</span>
                 </Link>
               </li>
               <li>
                 <Link
                   href="/events/new"
-                  className="group flex items-center gap-1.5 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+                  className="group inline-flex items-center gap-1 text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors py-0.5 leading-snug min-h-0"
                 >
-                  <ChevronRight className="h-3 w-3 stroke-[2.5] text-indigo-500 transition-transform duration-200 group-hover:translate-x-1 shrink-0" />
+                  <ChevronRight className="h-3 w-3 stroke-[2.5] text-indigo-500 transition-transform duration-200 group-hover:translate-x-0.5 shrink-0" />
                   <span>Create New Celebration</span>
                 </Link>
               </li>
               <li>
                 <Link
                   href="/settings"
-                  className="group flex items-center gap-1.5 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+                  className="group inline-flex items-center gap-1 text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors py-0.5 leading-snug min-h-0"
                 >
-                  <ChevronRight className="h-3 w-3 stroke-[2.5] text-indigo-500 transition-transform duration-200 group-hover:translate-x-1 shrink-0" />
+                  <ChevronRight className="h-3 w-3 stroke-[2.5] text-indigo-500 transition-transform duration-200 group-hover:translate-x-0.5 shrink-0" />
                   <span>Data Sovereignty Center</span>
                 </Link>
               </li>
@@ -168,18 +168,18 @@ export function Footer() {
           </div>
 
           {/* Col 2: Archetypes */}
-          <div className="space-y-2.5">
-            <h4 className="font-bold uppercase tracking-wider text-slate-900 dark:text-white text-[11px] flex items-center gap-1.5">
-              <Layers className="h-3 w-3 text-rose-500" />
+          <div className="space-y-2">
+            <h4 className="font-bold uppercase tracking-wider text-slate-900 dark:text-white text-[11px] flex items-center gap-1.5 mb-1.5">
+              <Layers className="h-3 w-3 text-rose-500 shrink-0" />
               <span>Celebrations</span>
             </h4>
-            <ul className="space-y-1.5 text-slate-600 dark:text-slate-400">
+            <ul className="space-y-1">
               <li>
                 <Link
                   href="/dashboard?filter=wedding"
-                  className="group flex items-center gap-1.5 hover:text-rose-500 dark:hover:text-rose-400 transition-colors"
+                  className="group inline-flex items-center gap-1 text-slate-600 dark:text-slate-400 hover:text-rose-500 dark:hover:text-rose-400 transition-colors py-0.5 leading-snug min-h-0"
                 >
-                  <ChevronRight className="h-3 w-3 stroke-[2.5] text-rose-500 transition-transform duration-200 group-hover:translate-x-1 shrink-0" />
+                  <ChevronRight className="h-3 w-3 stroke-[2.5] text-rose-500 transition-transform duration-200 group-hover:translate-x-0.5 shrink-0" />
                   <Crown className="h-3 w-3 text-rose-500 shrink-0" />
                   <span>Destination Weddings</span>
                 </Link>
@@ -187,9 +187,9 @@ export function Footer() {
               <li>
                 <Link
                   href="/dashboard?filter=birthday"
-                  className="group flex items-center gap-1.5 hover:text-indigo-500 dark:hover:text-indigo-400 transition-colors"
+                  className="group inline-flex items-center gap-1 text-slate-600 dark:text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-400 transition-colors py-0.5 leading-snug min-h-0"
                 >
-                  <ChevronRight className="h-3 w-3 stroke-[2.5] text-indigo-500 transition-transform duration-200 group-hover:translate-x-1 shrink-0" />
+                  <ChevronRight className="h-3 w-3 stroke-[2.5] text-indigo-500 transition-transform duration-200 group-hover:translate-x-0.5 shrink-0" />
                   <Cake className="h-3 w-3 text-indigo-500 shrink-0" />
                   <span>Milestone Birthdays</span>
                 </Link>
@@ -197,9 +197,9 @@ export function Footer() {
               <li>
                 <Link
                   href="/dashboard?filter=community"
-                  className="group flex items-center gap-1.5 hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors"
+                  className="group inline-flex items-center gap-1 text-slate-600 dark:text-slate-400 hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors py-0.5 leading-snug min-h-0"
                 >
-                  <ChevronRight className="h-3 w-3 stroke-[2.5] text-emerald-500 transition-transform duration-200 group-hover:translate-x-1 shrink-0" />
+                  <ChevronRight className="h-3 w-3 stroke-[2.5] text-emerald-500 transition-transform duration-200 group-hover:translate-x-0.5 shrink-0" />
                   <TreePine className="h-3 w-3 text-emerald-500 shrink-0" />
                   <span>Community Eco-Fairs</span>
                 </Link>
@@ -207,9 +207,9 @@ export function Footer() {
               <li>
                 <Link
                   href="/dashboard?filter=corporate"
-                  className="group flex items-center gap-1.5 hover:text-violet-500 dark:hover:text-violet-400 transition-colors"
+                  className="group inline-flex items-center gap-1 text-slate-600 dark:text-slate-400 hover:text-violet-500 dark:hover:text-violet-400 transition-colors py-0.5 leading-snug min-h-0"
                 >
-                  <ChevronRight className="h-3 w-3 stroke-[2.5] text-violet-500 transition-transform duration-200 group-hover:translate-x-1 shrink-0" />
+                  <ChevronRight className="h-3 w-3 stroke-[2.5] text-violet-500 transition-transform duration-200 group-hover:translate-x-0.5 shrink-0" />
                   <CalendarDays className="h-3 w-3 text-violet-500 shrink-0" />
                   <span>Corporate Summits</span>
                 </Link>
@@ -218,75 +218,75 @@ export function Footer() {
           </div>
 
           {/* Col 3: Engine Invariants */}
-          <div className="space-y-2.5">
-            <h4 className="font-bold uppercase tracking-wider text-slate-900 dark:text-white text-[11px] flex items-center gap-1.5">
-              <Scale className="h-3 w-3 text-emerald-500" />
+          <div className="space-y-2">
+            <h4 className="font-bold uppercase tracking-wider text-slate-900 dark:text-white text-[11px] flex items-center gap-1.5 mb-1.5">
+              <Scale className="h-3 w-3 text-emerald-500 shrink-0" />
               <span>Engine Invariants</span>
             </h4>
-            <ul className="space-y-1.5 text-slate-600 dark:text-slate-400">
+            <ul className="space-y-1">
               <li>
                 <Link
                   href="/dashboard"
-                  className="group flex items-center gap-1.5 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+                  className="group inline-flex items-center gap-1 text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors py-0.5 leading-snug min-h-0"
                 >
-                  <ChevronRight className="h-3 w-3 stroke-[2.5] text-emerald-500 transition-transform duration-200 group-hover:translate-x-1 shrink-0" />
+                  <ChevronRight className="h-3 w-3 stroke-[2.5] text-emerald-500 transition-transform duration-200 group-hover:translate-x-0.5 shrink-0" />
                   <span>100% Mathematical Precision</span>
                 </Link>
               </li>
               <li>
                 <Link
                   href="/dashboard"
-                  className="group flex items-center gap-1.5 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+                  className="group inline-flex items-center gap-1 text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors py-0.5 leading-snug min-h-0"
                 >
-                  <ChevronRight className="h-3 w-3 stroke-[2.5] text-emerald-500 transition-transform duration-200 group-hover:translate-x-1 shrink-0" />
+                  <ChevronRight className="h-3 w-3 stroke-[2.5] text-emerald-500 transition-transform duration-200 group-hover:translate-x-0.5 shrink-0" />
                   <span>5–10% Contingency Buffer</span>
                 </Link>
               </li>
               <li>
                 <Link
                   href="/onboarding"
-                  className="group flex items-center gap-1.5 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+                  className="group inline-flex items-center gap-1 text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors py-0.5 leading-snug min-h-0"
                 >
-                  <ChevronRight className="h-3 w-3 stroke-[2.5] text-emerald-500 transition-transform duration-200 group-hover:translate-x-1 shrink-0" />
+                  <ChevronRight className="h-3 w-3 stroke-[2.5] text-emerald-500 transition-transform duration-200 group-hover:translate-x-0.5 shrink-0" />
                   <span>Backwards Milestone Schedulers</span>
                 </Link>
               </li>
               <li>
                 <Link
                   href="/settings"
-                  className="group flex items-center gap-1.5 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+                  className="group inline-flex items-center gap-1 text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors py-0.5 leading-snug min-h-0"
                 >
-                  <ChevronRight className="h-3 w-3 stroke-[2.5] text-emerald-500 transition-transform duration-200 group-hover:translate-x-1 shrink-0" />
+                  <ChevronRight className="h-3 w-3 stroke-[2.5] text-emerald-500 transition-transform duration-200 group-hover:translate-x-0.5 shrink-0" />
                   <span>Explainable Trade-Off Matrix</span>
                 </Link>
               </li>
               <li>
                 <Link
                   href="/dashboard"
-                  className="group flex items-center gap-1.5 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+                  className="group inline-flex items-center gap-1 text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors py-0.5 leading-snug min-h-0"
                 >
-                  <ChevronRight className="h-3 w-3 stroke-[2.5] text-emerald-500 transition-transform duration-200 group-hover:translate-x-1 shrink-0" />
+                  <ChevronRight className="h-3 w-3 stroke-[2.5] text-emerald-500 transition-transform duration-200 group-hover:translate-x-0.5 shrink-0" />
                   <span>RFC 5545 iCalendar Exports</span>
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Col 4: Real Social Media & GitHub */}
-          <div className="space-y-2.5">
-            <h4 className="font-bold uppercase tracking-wider text-slate-900 dark:text-white text-[11px] flex items-center gap-1.5">
-              <Globe2 className="h-3 w-3 text-indigo-500" />
+          {/* Col 4: Real Social Media & Community */}
+          <div className="space-y-2">
+            <h4 className="font-bold uppercase tracking-wider text-slate-900 dark:text-white text-[11px] flex items-center gap-1.5 mb-1.5">
+              <Globe2 className="h-3 w-3 text-indigo-500 shrink-0" />
               <span>Connect & Community</span>
             </h4>
-            <ul className="space-y-1.5 text-slate-600 dark:text-slate-400">
+            <ul className="space-y-1">
               <li>
                 <a
                   href="https://github.com/Hrithik-05-Roshan/pw-challenge-5"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-1.5 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+                  className="group inline-flex items-center gap-1 text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors py-0.5 leading-snug min-h-0"
                 >
-                  <ChevronRight className="h-3 w-3 stroke-[2.5] text-indigo-500 transition-transform duration-200 group-hover:translate-x-1 shrink-0" />
+                  <ChevronRight className="h-3 w-3 stroke-[2.5] text-indigo-500 transition-transform duration-200 group-hover:translate-x-0.5 shrink-0" />
                   <span>GitHub Repository</span>
                 </a>
               </li>
@@ -295,9 +295,9 @@ export function Footer() {
                   href="https://twitter.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-1.5 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+                  className="group inline-flex items-center gap-1 text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors py-0.5 leading-snug min-h-0"
                 >
-                  <ChevronRight className="h-3 w-3 stroke-[2.5] text-indigo-500 transition-transform duration-200 group-hover:translate-x-1 shrink-0" />
+                  <ChevronRight className="h-3 w-3 stroke-[2.5] text-indigo-500 transition-transform duration-200 group-hover:translate-x-0.5 shrink-0" />
                   <span>X / Twitter Updates</span>
                 </a>
               </li>
@@ -306,9 +306,9 @@ export function Footer() {
                   href="https://linkedin.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-1.5 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+                  className="group inline-flex items-center gap-1 text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors py-0.5 leading-snug min-h-0"
                 >
-                  <ChevronRight className="h-3 w-3 stroke-[2.5] text-indigo-500 transition-transform duration-200 group-hover:translate-x-1 shrink-0" />
+                  <ChevronRight className="h-3 w-3 stroke-[2.5] text-indigo-500 transition-transform duration-200 group-hover:translate-x-0.5 shrink-0" />
                   <span>LinkedIn Network</span>
                 </a>
               </li>
@@ -317,9 +317,9 @@ export function Footer() {
                   href="https://instagram.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-1.5 hover:text-rose-500 dark:hover:text-rose-400 transition-colors"
+                  className="group inline-flex items-center gap-1 text-slate-600 dark:text-slate-400 hover:text-rose-500 dark:hover:text-rose-400 transition-colors py-0.5 leading-snug min-h-0"
                 >
-                  <ChevronRight className="h-3 w-3 stroke-[2.5] text-rose-500 transition-transform duration-200 group-hover:translate-x-1 shrink-0" />
+                  <ChevronRight className="h-3 w-3 stroke-[2.5] text-rose-500 transition-transform duration-200 group-hover:translate-x-0.5 shrink-0" />
                   <span>Instagram Inspiration</span>
                 </a>
               </li>
@@ -332,7 +332,7 @@ export function Footer() {
                 href="https://github.com/Hrithik-05-Roshan/pw-challenge-5"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-7 w-7 items-center justify-center rounded-lg bg-slate-100 dark:bg-white/[0.04] text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-white hover:scale-115 hover:-translate-y-0.5 hover:border-indigo-500/40 hover:shadow-xs transition-all border border-slate-200/80 dark:border-white/10"
+                className="flex h-7 w-7 items-center justify-center rounded-lg bg-slate-100 dark:bg-white/[0.04] text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-white hover:scale-110 hover:border-indigo-500/40 hover:shadow-xs transition-all border border-slate-200/80 dark:border-white/10 min-h-0"
                 aria-label="GitHub Repository"
                 title="GitHub Repository"
               >
@@ -346,7 +346,7 @@ export function Footer() {
                 href="https://twitter.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-7 w-7 items-center justify-center rounded-lg bg-slate-100 dark:bg-white/[0.04] text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-white hover:scale-115 hover:-translate-y-0.5 hover:border-indigo-500/40 hover:shadow-xs transition-all border border-slate-200/80 dark:border-white/10"
+                className="flex h-7 w-7 items-center justify-center rounded-lg bg-slate-100 dark:bg-white/[0.04] text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-white hover:scale-110 hover:border-indigo-500/40 hover:shadow-xs transition-all border border-slate-200/80 dark:border-white/10 min-h-0"
                 aria-label="X (formerly Twitter)"
                 title="X / Twitter"
               >
@@ -360,7 +360,7 @@ export function Footer() {
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-7 w-7 items-center justify-center rounded-lg bg-slate-100 dark:bg-white/[0.04] text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-white hover:scale-115 hover:-translate-y-0.5 hover:border-indigo-500/40 hover:shadow-xs transition-all border border-slate-200/80 dark:border-white/10"
+                className="flex h-7 w-7 items-center justify-center rounded-lg bg-slate-100 dark:bg-white/[0.04] text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-white hover:scale-110 hover:border-indigo-500/40 hover:shadow-xs transition-all border border-slate-200/80 dark:border-white/10 min-h-0"
                 aria-label="LinkedIn"
                 title="LinkedIn"
               >
@@ -374,7 +374,7 @@ export function Footer() {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-7 w-7 items-center justify-center rounded-lg bg-slate-100 dark:bg-white/[0.04] text-slate-700 dark:text-slate-300 hover:text-rose-500 dark:hover:text-rose-400 hover:scale-115 hover:-translate-y-0.5 hover:border-rose-500/40 hover:shadow-xs transition-all border border-slate-200/80 dark:border-white/10"
+                className="flex h-7 w-7 items-center justify-center rounded-lg bg-slate-100 dark:bg-white/[0.04] text-slate-700 dark:text-slate-300 hover:text-rose-500 dark:hover:text-rose-400 hover:scale-110 hover:border-rose-500/40 hover:shadow-xs transition-all border border-slate-200/80 dark:border-white/10 min-h-0"
                 aria-label="Instagram"
                 title="Instagram"
               >
@@ -388,7 +388,7 @@ export function Footer() {
                 href="https://youtube.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-7 w-7 items-center justify-center rounded-lg bg-slate-100 dark:bg-white/[0.04] text-slate-700 dark:text-slate-300 hover:text-rose-600 dark:hover:text-rose-400 hover:scale-115 hover:-translate-y-0.5 hover:border-rose-600/40 hover:shadow-xs transition-all border border-slate-200/80 dark:border-white/10"
+                className="flex h-7 w-7 items-center justify-center rounded-lg bg-slate-100 dark:bg-white/[0.04] text-slate-700 dark:text-slate-300 hover:text-rose-600 dark:hover:text-rose-400 hover:scale-110 hover:border-rose-600/40 hover:shadow-xs transition-all border border-slate-200/80 dark:border-white/10 min-h-0"
                 aria-label="YouTube"
                 title="YouTube"
               >
@@ -403,11 +403,11 @@ export function Footer() {
         {/* ======================================================== */}
         {/* BOTTOM BAR: Copyright, System Status & Handcrafted Badge */}
         {/* ======================================================== */}
-        <div className="pt-4 border-t border-slate-200/60 dark:border-white/5 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 dark:text-slate-400 gap-3">
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+        <div className="pt-3.5 border-t border-slate-200/60 dark:border-white/5 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 dark:text-slate-400 gap-2.5">
+          <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1">
             <Link
               href="/"
-              className="group inline-flex items-center gap-1 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+              className="group inline-flex items-center gap-1 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors min-h-0 py-0.5"
             >
               <ChevronRight className="h-3 w-3 stroke-[2.5] text-indigo-500 transition-transform duration-200 group-hover:translate-x-0.5 shrink-0" />
               <span>© 2026 Gatherly AI. Built for Challenge 5: Celebration & Event Planner.</span>
@@ -416,16 +416,16 @@ export function Footer() {
             <span className="text-[11px] font-mono">v1.2.0 • Production Ready</span>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             <Link
               href="/settings"
-              className="group flex items-center gap-1.5 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+              className="group inline-flex items-center gap-1.5 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors min-h-0 py-0.5"
             >
               <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
               <ChevronRight className="h-3 w-3 stroke-[2.5] text-emerald-500 transition-transform duration-200 group-hover:translate-x-0.5 shrink-0" />
               <span className="font-medium">All Systems Operational</span>
             </Link>
-            <p className="flex items-center gap-1">
+            <p className="inline-flex items-center gap-1">
               <span>Handcrafted with</span>
               <Heart className="h-3 w-3 text-rose-500 fill-rose-500 inline" />
               <span>for human celebrations</span>

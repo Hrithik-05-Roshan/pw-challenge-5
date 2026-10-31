@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { SkipLink } from "@/components/layout/SkipLink";
@@ -15,6 +15,12 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
+
 export const metadata: Metadata = {
   title: "Gatherly AI — Every celebration, beautifully planned.",
   description:
@@ -28,7 +34,6 @@ export const metadata: Metadata = {
     "Event Budget Calculator",
   ],
   authors: [{ name: "Gatherly AI Team" }],
-  viewport: "width=device-width, initial-scale=1, maximum-scale=5",
 };
 
 export default function RootLayout({

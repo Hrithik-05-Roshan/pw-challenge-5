@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Sparkles,
@@ -29,7 +29,7 @@ export default function OnboardingPage() {
   const {
     register,
     handleSubmit,
-    watch,
+    control,
     setValue,
     formState: { errors },
   } = useForm<CreateEventInput>({
@@ -51,11 +51,14 @@ export default function OnboardingPage() {
     },
   });
 
-  const selectedType = watch("eventType");
-  const selectedPriorities = watch("priorities") || [];
-  const currentBudget = watch("budget");
-  const currentGuests = watch("guests");
-  const currentCurrency = watch("currency");
+  const selectedType = useWatch({ control, name: "eventType" }) || "wedding";
+  const selectedPriorities = useWatch({ control, name: "priorities" }) || [];
+  const currentBudget = useWatch({ control, name: "budget" }) || 500000;
+  const currentGuests = useWatch({ control, name: "guests" }) || 150;
+  const currentCurrency = useWatch({ control, name: "currency" }) || "INR";
+  const currentCityTier = useWatch({ control, name: "cityTier" }) || 1;
+  const currentTitle = useWatch({ control, name: "title" }) || "My Dream Celebration";
+  const currentCity = useWatch({ control, name: "city" }) || "Mumbai";
 
   const togglePriority = (p: Priority) => {
     const exists = selectedPriorities.includes(p);
@@ -241,7 +244,7 @@ export default function OnboardingPage() {
                   </label>
                   <select
                     id="cityTier"
-                    value={watch("cityTier")}
+                    value={currentCityTier}
                     onChange={(e) =>
                       setValue("cityTier", parseInt(e.target.value) as CityTier, { shouldValidate: true })
                     }
@@ -397,7 +400,7 @@ export default function OnboardingPage() {
                   Ready to Generate Workspace
                 </h3>
                 <p className="text-[var(--foreground)]">
-                  <strong>{watch("title")}</strong> • {watch("guests")} guests in {watch("city")}
+                  <strong>{currentTitle}</strong> • {currentGuests} guests in {currentCity}
                 </p>
                 <p className="text-[var(--muted-foreground)]">
                   Total Budget: {currentBudget?.toLocaleString()} {currentCurrency} with guaranteed 100%

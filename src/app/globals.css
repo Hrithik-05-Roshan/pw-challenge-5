@@ -181,6 +181,32 @@ body {
   }
 }
 
+/* Gallery-style Page-wise CSS Scroll Snapping */
+html {
+  scroll-behavior: smooth;
+}
+
+.snap-scroll-container {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+.snap-page-section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media (max-height: 700px) {
+  .snap-page-section {
+    min-height: auto;
+    scroll-snap-align: none;
+  }
+}
+
 /* Accessible focus outline */
 *:focus-visible {
   outline: 2px solid var(--ring);

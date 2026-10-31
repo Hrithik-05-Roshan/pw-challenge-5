@@ -1,10 +1,19 @@
+/**
+ * @file ics.ts
+ * @description RFC 5545 compliant iCalendar (.ics) serialization and client-side export utility.
+ */
+
 import { EventPlan } from "@/types";
 
 /**
- * Generates an RFC 5545 compliant iCalendar string for the event and its tasks
+ * Generates an RFC 5545 compliant iCalendar string for the event and its backward milestones.
+ *
+ * @pure
+ * @param event - The complete event plan aggregate
+ * @returns RFC 5545 formatted CRLF-delimited string
  */
 export function generateICS(event: EventPlan): string {
-  const formatDate = (dateStr: string) => {
+  const formatDate = (dateStr: string): string => {
     return dateStr.replace(/-/g, "") + "T090000Z";
   };
 
@@ -46,6 +55,11 @@ export function generateICS(event: EventPlan): string {
   return lines.join("\r\n");
 }
 
+/**
+ * Triggers a client-side download of the event's .ics calendar file.
+ *
+ * @param event - The event plan to download
+ */
 export function downloadICS(event: EventPlan): void {
   const icsContent = generateICS(event);
   const blob = new Blob([icsContent], { type: "text/calendar;charset=utf-8" });

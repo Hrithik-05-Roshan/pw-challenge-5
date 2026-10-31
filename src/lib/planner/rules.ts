@@ -1,3 +1,17 @@
+/**
+ * @file rules.ts
+ * @description Deterministic Invariant Planning Engine for Gatherly AI.
+ *
+ * Implements core mathematical invariants, proportional category rebalancing,
+ * backwards milestone scheduling, risk modeling, and Explainable AI recommendations.
+ *
+ * Architectural Guarantees:
+ * 1. Mathematical Invariant: Category sum strictly equals 100% of the total budget.
+ * 2. Contingency Guarantee: Safety buffer is always strictly bounded between 5% and 10%.
+ * 3. Deterministic: Pure mathematical functions with zero side-effects ($O(N)$ time complexity).
+ * 4. Zero External Dependency: Runs seamlessly on client (browser) and server without third-party APIs.
+ */
+
 import {
   EventType,
   BudgetCategory,
@@ -9,79 +23,63 @@ import {
   Priority,
   EventPlan,
   BudgetReallocationResult,
+  BudgetDiffItem,
   FeasibilityReport,
 } from "@/types";
-
-// Base category weights per event type (sum must equal 100)
-const BASE_PERCENTAGES: Record<EventType, Record<BudgetCategory, number>> = {
-  wedding: {
-    venue: 25,
-    catering: 30,
-    decoration: 12,
-    photography: 10,
-    entertainment: 8,
-    attire: 5,
-    transportation: 2,
-    invitations: 1,
-    misc: 2,
-    contingency: 5, // minimum 5%
-  },
-  birthday: {
-    venue: 20,
-    catering: 35,
-    decoration: 15,
-    photography: 5,
-    entertainment: 12,
-    attire: 2,
-    transportation: 1,
-    invitations: 2,
-    misc: 3,
-    contingency: 5,
-  },
-  community: {
-    venue: 25,
-    catering: 25,
-    decoration: 10,
-    photography: 4,
-    entertainment: 15,
-    transportation: 6,
-    invitations: 2,
-    attire: 0,
-    misc: 5,
-    contingency: 8,
-  },
-  corporate: {
-    venue: 30,
-    catering: 30,
-    decoration: 8,
-    photography: 7,
-    entertainment: 10,
-    transportation: 4,
-    invitations: 1,
-    attire: 0,
-    misc: 3,
-    contingency: 7,
-  },
-  other: {
-    venue: 25,
-    catering: 30,
-    decoration: 10,
-    photography: 8,
-    entertainment: 10,
-    attire: 2,
-    transportation: 3,
-    invitations: 2,
-    misc: 3,
-    contingency: 7,
-  },
-};
+import {
+  BASE_PERCENTAGES,
+  CATEGORY_DISPLAY_TITLES,
+  CITY_TIER_MULTIPLIERS,
+  CONTINGENCY_BOUNDS,
+  DEFAULT_PER_GUEST_BENCHMARK,
+  FEASIBILITY_SAFETY_RATIO,
+  LEAD_TIME_THRESHOLDS,
+  MILESTONE_SCHEDULES,
+  MILESTONE_TEMPLATES,
+  PER_GUEST_BUDGET_BENCHMARKS,
+  PRIORITY_BOOST_PERCENTAGE,
+  PRIORITY_OFFSET_DECOR_DECREASE,
+  PRIORITY_OFFSET_MISC_DECREASE,
+  PRIORITY_OFFSET_TRANS_DECREASE,
+  SCALE_THRESHOLDS,
+} from "@/constants/planner";
 
 /**
- * Calculates deterministic budget allocation.
+ * Result contract returned when analyzing a sudden guest count change.
+ */
+export interface GuestCountChangeResult {
+  updatedGuests: number;
+  perGuestChange: number;
+  feasibility: FeasibilityReport;
+  actionRequired: string;
+}
+
+/**
+ * Result contract returned when calculating schedule adjustments upon date modification.
+ */
+export interface DateChangeResult {
+  daysRemaining: number;
+  isCompressed: boolean;
+  urgentTasks: string[];
+  riskNote: string;
+}
+
+/**
+ * Calculates a deterministic, invariant-satisfying budget allocation.
+ *
  * Guarantees:
- * 1. Category amounts sum exactly to 100% of the total budget.
- * 2. Contingency is always between 5% and 10%.
- * 3. Priorities and city tiers adjust weightings dynamically.
+ * 1. Category amounts sum exactly to 100% of the total budget to the last integer unit.
+ * 2. Contingency is strictly bounded between 5% and 10%.
+ * 3. Priorities and city tiers dynamically calibrate category distributions.
+ *
+ * @pure
+ * @complexity Time: O(K) where K is constant number of budget categories (10), Space: O(K)
+ * @param eventType - Classification of the event
+ * @param totalBudget - Total available budget in event currency
+ * @param guestCount - Number of anticipated attendees
+ * @param cityTier - Economic city tier (1 = Metro, 2 = Major, 3 = Regional)
+ * @param priorities - User-selected priority areas
+ * @returns Array of BudgetItem line items summing to totalBudget
  */
 export function calculateBudgetAllocation(
   eventType: EventType,
@@ -90,10 +88,12 @@ export function calculateBudgetAllocation(
   cityTier: CityTier = 2,
   priorities: Priority[] = ["balanced"]
 ): BudgetItem[] {
-  const base = { ...BASE_PERCENTAGES[eventType] || BASE_PERCENTAGES.other };
+  // Clone base percentage weights for event type
+  const basePercentagesSource = BASE_PERCENTAGES[eventType] || BASE_PERCENTAGES.other;
+  const base: Record<BudgetCategory, number> = { ...basePercentagesSource };
 
   // Adjust for high guest-count scale (scale catering & venue, decrease attire/decor slightly)
-  if (guestCount > 200) {
+  if (guestCount > SCALE_THRESHOLDS.HIGH_SCALE_GUEST_THRESHOLD) {
     base.catering += 4;
     base.venue += 2;
     base.decoration = Math.max(5, base.decoration - 3);
@@ -106,36 +106,39 @@ export function calculateBudgetAllocation(
     base.decoration = Math.max(5, base.decoration - 3);
   } else if (cityTier === 3) {
     base.venue = Math.max(15, base.venue - 4);
-    base.contingency = Math.min(10, base.contingency + 4);
+    base.contingency = Math.min(CONTINGENCY_BOUNDS.MAX_PERCENT, base.contingency + 4);
   }
 
   // Adjust for user priorities
   for (const prio of priorities) {
     if (prio === "catering") {
-      base.catering += 5;
-      base.misc = Math.max(1, base.misc - 2);
-      base.transportation = Math.max(1, base.transportation - 3);
+      base.catering += PRIORITY_BOOST_PERCENTAGE;
+      base.misc = Math.max(1, base.misc - PRIORITY_OFFSET_MISC_DECREASE);
+      base.transportation = Math.max(1, base.transportation - PRIORITY_OFFSET_TRANS_DECREASE);
     } else if (prio === "venue") {
-      base.venue += 5;
-      base.misc = Math.max(1, base.misc - 2);
-      base.entertainment = Math.max(5, base.entertainment - 3);
+      base.venue += PRIORITY_BOOST_PERCENTAGE;
+      base.misc = Math.max(1, base.misc - PRIORITY_OFFSET_MISC_DECREASE);
+      base.entertainment = Math.max(5, base.entertainment - PRIORITY_OFFSET_DECOR_DECREASE);
     } else if (prio === "decor") {
-      base.decoration += 5;
-      base.misc = Math.max(1, base.misc - 2);
-      base.transportation = Math.max(1, base.transportation - 3);
+      base.decoration += PRIORITY_BOOST_PERCENTAGE;
+      base.misc = Math.max(1, base.misc - PRIORITY_OFFSET_MISC_DECREASE);
+      base.transportation = Math.max(1, base.transportation - PRIORITY_OFFSET_TRANS_DECREASE);
     } else if (prio === "photography") {
-      base.photography += 5;
-      base.misc = Math.max(1, base.misc - 2);
-      base.entertainment = Math.max(5, base.entertainment - 3);
+      base.photography += PRIORITY_BOOST_PERCENTAGE;
+      base.misc = Math.max(1, base.misc - PRIORITY_OFFSET_MISC_DECREASE);
+      base.entertainment = Math.max(5, base.entertainment - PRIORITY_OFFSET_DECOR_DECREASE);
     } else if (prio === "entertainment") {
-      base.entertainment += 5;
-      base.misc = Math.max(1, base.misc - 2);
-      base.decoration = Math.max(5, base.decoration - 3);
+      base.entertainment += PRIORITY_BOOST_PERCENTAGE;
+      base.misc = Math.max(1, base.misc - PRIORITY_OFFSET_MISC_DECREASE);
+      base.decoration = Math.max(5, base.decoration - PRIORITY_OFFSET_DECOR_DECREASE);
     }
   }
 
-  // Enforce contingency between 5% and 10%
-  const targetContingency = Math.max(5, Math.min(10, base.contingency));
+  // Enforce contingency invariant between 5% and 10%
+  const targetContingency = Math.max(
+    CONTINGENCY_BOUNDS.MIN_PERCENT,
+    Math.min(CONTINGENCY_BOUNDS.MAX_PERCENT, base.contingency)
+  );
   base.contingency = targetContingency;
 
   // Normalize other categories so that (sum of others) equals (100 - targetContingency)
@@ -170,23 +173,10 @@ export function calculateBudgetAllocation(
       runningAmount += amount;
     }
 
-    const titleMap: Record<BudgetCategory, string> = {
-      venue: "Venue & Facility Rental",
-      catering: "Catering, Drinks & Food Service",
-      decoration: "Florals, Decor & Styling",
-      photography: "Photography & Videography",
-      entertainment: "Music, Sound & Live Acts",
-      transportation: "Guest & Logistics Transit",
-      invitations: "Stationery & Digital Invites",
-      attire: "Attire, Hair & Grooming",
-      misc: "Operational Sundries & Permits",
-      contingency: "Safety Reserve & Overrun Buffer",
-    };
-
     return {
       id: `budget-${cat}-${Date.now()}-${idx}`,
       category: cat,
-      name: titleMap[cat],
+      name: CATEGORY_DISPLAY_TITLES[cat] || cat,
       plannedAmount: Math.max(0, amount),
       estimatedAmount: Math.max(0, amount),
       actualAmount: 0,
@@ -198,7 +188,15 @@ export function calculateBudgetAllocation(
 }
 
 /**
- * Deterministic Budget Cut / Reallocation with before/after diff explanation
+ * Deterministic Budget Cut / Reallocation with before/after diff explanation.
+ *
+ * Computes an explicit before/after delta across every budget category,
+ * demonstrating how discretionary spend is safely absorbed while protecting core reserves.
+ *
+ * @pure
+ * @param currentPlan - Current event plan with previous budget
+ * @param newBudget - Target new budget amount
+ * @returns Transparent reallocation result with diff items and explanation
  */
 export function handleBudgetReallocation(
   currentPlan: EventPlan,
@@ -216,7 +214,7 @@ export function handleBudgetReallocation(
     currentPlan.priorities
   );
 
-  const diffItems = currentPlan.budgetItems.map((oldItem) => {
+  const diffItems: BudgetDiffItem[] = currentPlan.budgetItems.map((oldItem) => {
     const matchedNew = newItems.find((n) => n.category === oldItem.category);
     const newPlanned = matchedNew ? matchedNew.plannedAmount : 0;
     const catDiff = newPlanned - oldItem.plannedAmount;
@@ -258,16 +256,16 @@ export function handleBudgetReallocation(
 /**
  * Handles sudden guest count surge/drop.
  * Recalculates catering per plate and evaluates venue capacity limits.
+ *
+ * @pure
+ * @param currentPlan - Current event plan
+ * @param newGuestCount - Updated attendee headcount
+ * @returns Headcount change impact analysis with feasibility report
  */
 export function handleGuestCountChange(
   currentPlan: EventPlan,
   newGuestCount: number
-): {
-  updatedGuests: number;
-  perGuestChange: number;
-  feasibility: FeasibilityReport;
-  actionRequired: string;
-} {
+): GuestCountChangeResult {
   const diff = newGuestCount - currentPlan.guests;
   const cateringItem = currentPlan.budgetItems.find((b) => b.category === "catering");
   const cateringBudget = cateringItem ? cateringItem.plannedAmount : currentPlan.budget * 0.3;
@@ -281,9 +279,9 @@ export function handleGuestCountChange(
   );
 
   let actionRequired = "Headcount change accommodates current venue capacity without conflict.";
-  if (diff > 20) {
+  if (diff > SCALE_THRESHOLDS.CRITICAL_GUEST_SURGE_THRESHOLD) {
     actionRequired = `CRITICAL ACTION: +${diff} guests will compress catering budget to ~${Math.round(newPerGuest).toLocaleString()} ${currentPlan.currency}/guest. Verify venue square footage and place supplementary catering order.`;
-  } else if (diff < -15) {
+  } else if (diff < SCALE_THRESHOLDS.SURPLUS_GUEST_DROP_THRESHOLD) {
     actionRequired = `Headcount dropped by ${Math.abs(diff)}. Opportunity to reallocate surplus catering budget to enhanced decor or favors.`;
   }
 
@@ -296,29 +294,30 @@ export function handleGuestCountChange(
 }
 
 /**
- * Handles Date Change / Lead Time Compression
+ * Handles Date Change / Lead Time Compression.
+ * Adjusts timeline urgency and flags critical milestones requiring expedited action.
+ *
+ * @pure
+ * @param currentPlan - Current event plan
+ * @param newDate - Target event date string (YYYY-MM-DD)
+ * @returns Diagnostic compression status and urgent task checklist
  */
 export function handleDateChange(
   currentPlan: EventPlan,
   newDate: string
-): {
-  daysRemaining: number;
-  isCompressed: boolean;
-  urgentTasks: string[];
-  riskNote: string;
-} {
+): DateChangeResult {
   const today = new Date();
   const target = new Date(newDate);
   const diffMs = target.getTime() - today.getTime();
   const daysRemaining = Math.max(1, Math.ceil(diffMs / (1000 * 60 * 60 * 24)));
-  const isCompressed = daysRemaining < 45;
+  const isCompressed = daysRemaining < LEAD_TIME_THRESHOLDS.COMPRESSED_SCHEDULE_DAYS;
 
   const urgentTasks: string[] = [];
-  if (daysRemaining <= 14) {
+  if (daysRemaining <= LEAD_TIME_THRESHOLDS.CRITICAL_URGENT_DAYS) {
     urgentTasks.push("Lock final guest RSVP count immediately");
     urgentTasks.push("Pay venue & catering balance settlements");
     urgentTasks.push("Conduct vendor run-sheet confirmation calls");
-  } else if (daysRemaining <= 30) {
+  } else if (daysRemaining <= LEAD_TIME_THRESHOLDS.HIGH_URGENT_DAYS) {
     urgentTasks.push("Freeze decorator layouts and floral orders");
     urgentTasks.push("Send RSVP reminders to unconfirmed guests");
   }
@@ -336,7 +335,15 @@ export function handleDateChange(
 }
 
 /**
- * Feasibility Check
+ * Feasibility Check.
+ * Assesses whether a proposed budget is realistic for the given headcount, city tier, and event type.
+ *
+ * @pure
+ * @param budget - Total budget
+ * @param guests - Headcount
+ * @param cityTier - Economic city tier
+ * @param eventType - Event type
+ * @returns Feasibility diagnosis with warnings and actionable trade-offs
  */
 export function calculateFeasibility(
   budget: number,
@@ -347,17 +354,11 @@ export function calculateFeasibility(
   const budgetPerGuest = Math.round(budget / guests);
 
   // Minimum realistic cost per guest benchmarks in INR (adjusted for Tier)
-  const tierMultiplier = cityTier === 1 ? 1.35 : cityTier === 2 ? 1.0 : 0.8;
-  const baseBenchmarks: Record<EventType, number> = {
-    wedding: 2500,
-    birthday: 600,
-    community: 350,
-    corporate: 1500,
-    other: 700,
-  };
+  const tierMultiplier = CITY_TIER_MULTIPLIERS[cityTier] || 1.0;
+  const benchmarkCost = PER_GUEST_BUDGET_BENCHMARKS[eventType] || DEFAULT_PER_GUEST_BENCHMARK;
 
-  const recommendedMinimum = Math.round((baseBenchmarks[eventType] || 800) * tierMultiplier);
-  const isFeasible = budgetPerGuest >= recommendedMinimum * 0.75;
+  const recommendedMinimum = Math.round(benchmarkCost * tierMultiplier);
+  const isFeasible = budgetPerGuest >= recommendedMinimum * FEASIBILITY_SAFETY_RATIO;
 
   const warnings: string[] = [];
   const tradeOffs: string[] = [];
@@ -381,8 +382,16 @@ export function calculateFeasibility(
 }
 
 /**
- * Contextual Risk Generator
- * Generates realistic risks worded as possibilities, not prophecies.
+ * Contextual Risk Generator.
+ * Generates realistic operational and logistical risks worded as possibilities, not prophecies.
+ *
+ * @pure
+ * @param eventType - Event type
+ * @param guestCount - Total expected guests
+ * @param budget - Total budget
+ * @param cityTier - Economic city tier
+ * @param priorities - User priorities
+ * @returns Array of contextual RiskItem models
  */
 export function generateRisks(
   eventType: EventType,
@@ -446,7 +455,14 @@ export function generateRisks(
 }
 
 /**
- * Deterministic Backwards Timeline Schedule
+ * Deterministic Backwards Timeline Schedule.
+ * Generates structured countdown milestones anchoring backward from the event date.
+ *
+ * @pure
+ * @param eventType - Event type
+ * @param eventDateStr - Event celebration date (YYYY-MM-DD)
+ * @param creationDateStr - Planning start date (defaulting to today)
+ * @returns Array of scheduled Task models
  */
 export function generateTimeline(
   eventType: EventType,
@@ -458,29 +474,19 @@ export function generateTimeline(
   const diffDays = Math.max(1, Math.ceil((eventDate.getTime() - creationDate.getTime()) / (1000 * 60 * 60 * 24)));
 
   // Milestone offsets (days before event)
-  const offsets = diffDays >= 90
-    ? [90, 60, 45, 30, 14, 7, 2, 0]
-    : diffDays >= 45
-    ? [45, 30, 21, 14, 7, 2, 0]
+  const offsets: number[] = diffDays >= LEAD_TIME_THRESHOLDS.STANDARD_PLANNING_DAYS
+    ? [...MILESTONE_SCHEDULES.LONG_HORIZON]
+    : diffDays >= LEAD_TIME_THRESHOLDS.COMPRESSED_SCHEDULE_DAYS
+    ? [...MILESTONE_SCHEDULES.MEDIUM_HORIZON]
     : [Math.floor(diffDays * 0.8), Math.floor(diffDays * 0.5), Math.floor(diffDays * 0.2), 2, 0];
 
   const tasks: Task[] = [];
-  const milestoneLabels = [
-    { title: "Finalize venue contract & deposit", category: "venue" as BudgetCategory, prio: "high" as const },
-    { title: "Book caterer and lock menu tasting", category: "catering" as BudgetCategory, prio: "high" as const },
-    { title: "Approve theme, lighting & decor blueprint", category: "decoration" as BudgetCategory, prio: "medium" as const },
-    { title: "Send formal invitations & open RSVP portal", category: "invitations" as BudgetCategory, prio: "high" as const },
-    { title: "Confirm photographer & day-of shot list", category: "photography" as BudgetCategory, prio: "medium" as const },
-    { title: "Freeze final headcount & dietary list", category: "catering" as BudgetCategory, prio: "high" as const },
-    { title: "Final vendor walkthrough & rehearsal", category: "misc" as BudgetCategory, prio: "medium" as const },
-    { title: "Day-of event celebration execution", category: "entertainment" as BudgetCategory, prio: "high" as const },
-  ];
 
   offsets.forEach((offset, idx) => {
-    const template = milestoneLabels[idx] || {
+    const template = MILESTONE_TEMPLATES[idx] || {
       title: `Preparation milestone T-${offset} days`,
       category: "misc" as BudgetCategory,
-      prio: "medium" as const,
+      priority: "medium" as const,
     };
 
     const taskDate = new Date(eventDate);
@@ -492,7 +498,7 @@ export function generateTimeline(
       title: template.title,
       category: template.category,
       dueDate: dueDateStr,
-      priority: template.prio,
+      priority: template.priority,
       completed: offset > diffDays, // Mark past tasks as completed if starting late
       isOverdue: false,
     });
@@ -502,7 +508,17 @@ export function generateTimeline(
 }
 
 /**
- * Deterministic Explainable AI Recommendations
+ * Deterministic Explainable AI Recommendations.
+ * Implements structured explainability (Action, Reasoning, Expected Impact, Alternatives, Context).
+ *
+ * @pure
+ * @param eventType - Event type
+ * @param budget - Total budget
+ * @param guests - Headcount
+ * @param cityTier - Economic city tier
+ * @param priorities - User priorities
+ * @param currency - Currency symbol or code
+ * @returns Array of structured ExplainableRecommendation models
  */
 export function generateExplainableRecommendations(
   eventType: EventType,

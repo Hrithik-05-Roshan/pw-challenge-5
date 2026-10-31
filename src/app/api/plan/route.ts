@@ -1,3 +1,15 @@
+/**
+ * @file route.ts
+ * @description API route handler for POST /api/plan.
+ *
+ * Implements defensive HTTP boundary verification:
+ * 1. Content-Type verification (application/json)
+ * 2. Sliding window rate limiting (20 req / minute per IP)
+ * 3. Payload size caps (64 KB)
+ * 4. Zod schema validation
+ * 5. Gemini AI integration with automatic deterministic offline fallback
+ */
+
 import { NextRequest, NextResponse } from "next/server";
 import { PlanApiRequestSchema } from "@/lib/validation/schemas";
 import { GeminiPlannerService } from "@/lib/ai/provider";
@@ -6,7 +18,13 @@ import { checkRateLimit } from "@/lib/security/rate-limiter";
 const plannerService = new GeminiPlannerService();
 const MAX_BODY_BYTES = 64 * 1024; // 64 KB
 
-export async function POST(request: NextRequest) {
+/**
+ * Handles incoming plan generation requests.
+ *
+ * @param request - NextRequest instance
+ * @returns JSON response containing generated or deterministic fallback plan
+ */
+export async function POST(request: NextRequest): Promise<NextResponse> {
   // 1. Content-Type check
   const contentType = request.headers.get("content-type");
   if (!contentType || !contentType.includes("application/json")) {
@@ -83,7 +101,9 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// Method not allowed handler
-export async function GET() {
+/**
+ * Handles unsupported HTTP GET requests.
+ */
+export async function GET(): Promise<NextResponse> {
   return NextResponse.json({ error: "Method Not Allowed" }, { status: 405 });
 }

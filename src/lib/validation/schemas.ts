@@ -1,5 +1,14 @@
+/**
+ * @file schemas.ts
+ * @description Zod runtime validation schemas enforcing strict input boundaries,
+ * string sanitization, and type-safe payloads across API endpoints and client actions.
+ */
+
 import { z } from "zod";
 
+/**
+ * Event classification schema.
+ */
 export const EventTypeSchema = z.enum([
   "wedding",
   "birthday",
@@ -8,10 +17,19 @@ export const EventTypeSchema = z.enum([
   "other",
 ]);
 
+/**
+ * Currency code schema.
+ */
 export const CurrencySchema = z.enum(["INR", "USD", "EUR", "GBP"]);
 
+/**
+ * Economic city tier schema (1: Metros, 2: Emerging, 3: Regional).
+ */
 export const CityTierSchema = z.union([z.literal(1), z.literal(2), z.literal(3)]);
 
+/**
+ * Priority focus area schema.
+ */
 export const PrioritySchema = z.enum([
   "venue",
   "catering",
@@ -21,6 +39,9 @@ export const PrioritySchema = z.enum([
   "balanced",
 ]);
 
+/**
+ * Canonical budget category schema.
+ */
 export const BudgetCategorySchema = z.enum([
   "venue",
   "catering",
@@ -34,6 +55,9 @@ export const BudgetCategorySchema = z.enum([
   "contingency",
 ]);
 
+/**
+ * Schema validating user input when initializing a celebration plan.
+ */
 export const CreateEventInputSchema = z.object({
   title: z
     .string()
@@ -68,22 +92,33 @@ export const CreateEventInputSchema = z.object({
 
 export type CreateEventInput = z.infer<typeof CreateEventInputSchema>;
 
+/**
+ * Schema validating budget reallocation shock simulation requests.
+ */
 export const ReallocateBudgetInputSchema = z.object({
   eventId: z.string().min(1),
   newBudget: z.number().positive().min(1000),
 });
 
+/**
+ * Schema validating dynamic guest count adjustments.
+ */
 export const UpdateGuestCountInputSchema = z.object({
   eventId: z.string().min(1),
   newGuestCount: z.number().int().min(2).max(10000),
 });
 
+/**
+ * Schema validating celebration date modification and lead-time adjustments.
+ */
 export const UpdateDateInputSchema = z.object({
   eventId: z.string().min(1),
   newDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
 });
 
-// API Plan Request Schema
+/**
+ * Schema validating incoming POST /api/plan requests.
+ */
 export const PlanApiRequestSchema = z.object({
   eventType: EventTypeSchema,
   title: z.string().trim().min(3).max(80),
@@ -100,7 +135,9 @@ export const PlanApiRequestSchema = z.object({
 
 export type PlanApiRequest = z.infer<typeof PlanApiRequestSchema>;
 
-// Strict Zod schema for Explainable AI output validation
+/**
+ * Strict schema for Explainable AI output validation.
+ */
 export const ExplainableRecommendationSchema = z.object({
   id: z.string(),
   title: z.string(),
@@ -111,6 +148,9 @@ export const ExplainableRecommendationSchema = z.object({
   relevantEventContext: z.string(),
 });
 
+/**
+ * Schema for upstream AI model response validation.
+ */
 export const AIPlanResponseSchema = z.object({
   overview: z.string(),
   recommendations: z.array(ExplainableRecommendationSchema),

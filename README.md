@@ -206,7 +206,7 @@ Authentic test run logs are documented in [TEST_REPORT.md](./TEST_REPORT.md).
 
 | Evaluation Criterion | Implementation Highlights | Verification Command / File |
 | :--- | :--- | :--- |
-| **1. Code Quality** | Next.js 16.4.3 App Router, React 19, TypeScript strict mode with 0 errors, Zod validation, modular component architecture, clean separation of concerns. | `npm run typecheck`, `npm run lint` |
+| **1. Code Quality** | Clean Architecture, modular component decomposition (<250 lines), TypeScript strict mode with 0 errors/warnings, centralized constants, runtime type guards, Zod validation. | `docs/CODE_QUALITY.md`, `npm run typecheck`, `npm run lint` |
 | **2. Security** | OWASP LLM Top 10 mitigation, prompt injection filter, sliding-window rate limiter, strict CSP headers, zero-PII client privacy. | `security/THREAT_MODEL.md`, `tests/unit/sanitizer.test.ts` |
 | **3. Efficiency** | Turbopack compilation under 32s, client-side zero-latency LocalStorage, repository size strictly within 5 MB target, lightweight dependencies. | `npm run size-check`, `npm run build` |
 | **4. Testing** | 39 comprehensive Vitest unit and AI evaluation tests covering realistic benchmarks with 100% pass rate. | `npm test`, `TEST_REPORT.md` |

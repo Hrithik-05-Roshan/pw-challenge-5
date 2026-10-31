@@ -70,9 +70,8 @@ export function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-sm font-medium transition-colors hover:text-indigo-600 rounded-md px-2 py-1 ${
-                  isActive ? "text-indigo-600 font-semibold" : "text-[var(--muted-foreground)]"
-                }`}
+                className={`text-sm font-medium transition-colors hover:text-indigo-600 rounded-md px-2 py-1 ${isActive ? "text-indigo-600 font-semibold" : "text-[var(--muted-foreground)]"
+                  }`}
                 aria-current={isActive ? "page" : undefined}
               >
                 {link.label}
@@ -144,11 +143,10 @@ export function Navbar() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className={`px-3 py-2 rounded-md text-sm font-medium ${
-                  pathname === link.href
+                className={`px-3 py-2 rounded-md text-sm font-medium ${pathname === link.href
                     ? "bg-indigo-600/10 text-indigo-600 font-semibold"
                     : "text-[var(--foreground)] hover:bg-[var(--secondary)]"
-                }`}
+                  }`}
               >
                 {link.label}
               </Link>

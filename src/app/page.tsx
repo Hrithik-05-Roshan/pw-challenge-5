@@ -7,146 +7,168 @@ import {
   PieChart,
   CheckCircle2,
   Clock,
-  ChevronDown,
+  CalendarDays,
+  Crown,
+  Cake,
+  TreePine,
+  PartyPopper,
+  FileDown,
+  Lock,
+  Lightbulb,
+  AlertTriangle,
+  Users2,
+  Compass,
 } from "lucide-react";
 
 export default function LandingPage() {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen ambient-bg overflow-hidden">
       {/* Hero Section */}
-      <section className="relative overflow-hidden py-16 sm:py-24 lg:py-28 bg-[var(--background)]">
+      <section className="relative overflow-hidden pt-12 pb-20 sm:pt-20 sm:pb-28 lg:pt-24 lg:pb-32">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
             {/* Left Copy */}
-            <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3.5 py-1.5 text-xs font-semibold text-indigo-600 dark:text-indigo-400">
-                <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
-                <span>Deterministic AI Architecture • Zero Hallucinations</span>
+            <div className="lg:col-span-7 space-y-7 text-center lg:text-left">
+              {/* Badge */}
+              <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 dark:bg-indigo-500/15 px-4 py-1.5 text-xs font-semibold text-indigo-700 dark:text-indigo-300 shadow-sm backdrop-blur-md">
+                <span className="flex h-2 w-2 rounded-full bg-indigo-500 animate-ping" />
+                <Sparkles className="h-3.5 w-3.5 text-indigo-500" aria-hidden="true" />
+                <span className="tracking-wide">Challenge 5 • Celebration & Event Planner</span>
               </div>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[var(--foreground)] leading-[1.15]">
-                Plan Less. <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600">
-                  Celebrate More.
-                </span>
+              {/* Main Headline */}
+              <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 dark:text-white leading-[1.12]">
+                Architecting Unforgettable <br />
+                <span className="shimmer-text">Celebrations & Moments.</span>
               </h1>
 
-              <p className="text-lg sm:text-xl text-[var(--muted-foreground)] max-w-2xl mx-auto lg:mx-0">
-                Gatherly AI organizes your weddings, birthdays, and community festivals with
-                mathematically guaranteed 100% budget allocation, backwards milestone timelines, and
-                contextual risk contingencies.
+              {/* Tagline & Subtitle */}
+              <p className="text-base sm:text-lg lg:text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
+                Organize weddings, milestone birthdays, and community festivals with 
+                <strong className="text-slate-900 dark:text-white font-semibold"> mathematically guaranteed 100% budget allocation</strong>, 
+                backwards milestone timelines, transparent explainable vendor choices, and zero-PII guest privacy.
               </p>
 
-              {/* CTAs */}
+              {/* Primary CTAs */}
               <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
                 <Link
                   href="/onboarding"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg bg-indigo-600 px-6 py-3.5 text-base font-semibold text-white shadow-sm hover:bg-indigo-700 transition-colors"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-xl bg-gradient-to-r from-indigo-600 via-indigo-600 to-violet-600 px-7 py-3.5 text-sm font-bold text-white shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200"
                 >
-                  <span>Start Planning</span>
+                  <PartyPopper className="h-4 w-4" aria-hidden="true" />
+                  <span>Start Planning Wizard</span>
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
 
                 <Link
                   href="/dashboard"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg border border-[var(--border)] bg-[var(--card)] px-6 py-3.5 text-base font-semibold text-[var(--foreground)] hover:bg-[var(--secondary)] transition-colors"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 dark:border-white/10 bg-white/80 dark:bg-white/[0.04] px-6 py-3.5 text-sm font-semibold text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-white/10 backdrop-blur-md transition-all duration-200"
                 >
-                  <span>Explore Demo</span>
+                  <Compass className="h-4 w-4 text-indigo-500" aria-hidden="true" />
+                  <span>Explore Demo Workspaces</span>
                 </Link>
               </div>
 
-              <div className="flex items-center justify-center lg:justify-start gap-6 pt-4 text-xs text-[var(--muted-foreground)]">
+              {/* Trust Indicators */}
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-y-2 gap-x-6 pt-3 text-xs text-slate-500 dark:text-slate-400 font-medium">
                 <span className="flex items-center gap-1.5">
                   <ShieldCheck className="h-4 w-4 text-emerald-500" aria-hidden="true" />
-                  No credit card or login needed
+                  Zero-PII Client-Side Privacy
                 </span>
                 <span className="flex items-center gap-1.5">
                   <CheckCircle2 className="h-4 w-4 text-indigo-500" aria-hidden="true" />
-                  100% Client-side Guest Privacy
+                  Deterministic 100% Budget Math
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <Clock className="h-4 w-4 text-amber-500" aria-hidden="true" />
+                  Backwards Timeline Scheduling
                 </span>
               </div>
             </div>
 
-            {/* Right Interactive Mockup (CSS & SVG Visuals) */}
+            {/* Right Interactive Mockup */}
             <div className="lg:col-span-5" aria-hidden="true">
-              <div className="relative rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5 shadow-xl">
-                {/* Mockup Header */}
-                <div className="flex items-center justify-between border-b border-[var(--border)] pb-3 mb-4">
+              <div className="relative glass-card rounded-2xl p-6 shadow-2xl ring-1 ring-black/5 dark:ring-white/10">
+                {/* Window header */}
+                <div className="flex items-center justify-between border-b border-slate-200/80 dark:border-white/10 pb-3 mb-5">
                   <div className="flex items-center gap-2">
-                    <span className="h-3 w-3 rounded-full bg-rose-500" />
-                    <span className="h-3 w-3 rounded-full bg-amber-500" />
-                    <span className="h-3 w-3 rounded-full bg-emerald-500" />
+                    <span className="h-3 w-3 rounded-full bg-rose-500/80 shadow-sm" />
+                    <span className="h-3 w-3 rounded-full bg-amber-500/80 shadow-sm" />
+                    <span className="h-3 w-3 rounded-full bg-emerald-500/80 shadow-sm" />
                   </div>
-                  <span className="text-xs font-mono text-[var(--muted-foreground)]">
-                    workspace.gatherly.ai
-                  </span>
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300">
+                    <Sparkles className="h-3 w-3 text-indigo-500" />
+                    <span>gatherly.workspace</span>
+                  </div>
                 </div>
 
-                {/* Mockup Content */}
+                {/* Event Card Content */}
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <div>
-                      <h3 className="text-sm font-bold text-[var(--foreground)]">
-                        Priya&apos;s 30th Birthday Bash
-                      </h3>
-                      <p className="text-xs text-[var(--muted-foreground)]">Kolkata • 80 Guests</p>
+                      <div className="flex items-center gap-2">
+                        <Crown className="h-4 w-4 text-amber-500" />
+                        <h3 className="font-heading text-base font-bold text-slate-900 dark:text-white">
+                          Aarav & Meera&apos;s Royal Wedding
+                        </h3>
+                      </div>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Udaipur • 350 Guests • Destination Grandeur</p>
                     </div>
-                    <span className="text-xs font-bold text-emerald-600 bg-emerald-500/10 px-2 py-0.5 rounded">
-                      Budget 100% Balanced
+                    <span className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20">
+                      100% Balanced
                     </span>
                   </div>
 
-                  {/* Budget Progress Bar */}
-                  <div className="space-y-1.5">
-                    <div className="flex justify-between text-xs font-medium">
-                      <span>Total Allocation</span>
-                      <span className="font-semibold">₹60,000 INR</span>
+                  {/* Budget Allocation Bar */}
+                  <div className="space-y-2 p-3.5 rounded-xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200/60 dark:border-white/5">
+                    <div className="flex justify-between items-center text-xs">
+                      <span className="text-slate-500 dark:text-slate-400 font-medium">Total Allocated Budget</span>
+                      <span className="font-heading font-extrabold text-sm text-slate-900 dark:text-white">₹25,00,000 INR</span>
                     </div>
-                    <div className="h-3 w-full rounded-full bg-slate-200 dark:bg-slate-800 flex overflow-hidden">
-                      <div className="bg-indigo-600 h-full w-[35%]" title="Catering 35%" />
-                      <div className="bg-violet-500 h-full w-[20%]" title="Venue 20%" />
-                      <div className="bg-pink-500 h-full w-[15%]" title="Decor 15%" />
-                      <div className="bg-amber-500 h-full w-[12%]" title="Entertainment 12%" />
-                      <div className="bg-emerald-500 h-full w-[8%]" title="Contingency 8%" />
-                      <div className="bg-slate-400 h-full w-[10%]" title="Other 10%" />
+                    
+                    <div className="h-3.5 w-full rounded-full bg-slate-200 dark:bg-slate-800 flex overflow-hidden p-0.5 gap-0.5">
+                      <div className="bg-indigo-600 rounded-l-full h-full w-[40%]" title="Venue & Lodging (40%)" />
+                      <div className="bg-violet-500 h-full w-[28%]" title="Catering (28%)" />
+                      <div className="bg-pink-500 h-full w-[12%]" title="Decor & Florals (12%)" />
+                      <div className="bg-amber-500 h-full w-[8%]" title="Photography (8%)" />
+                      <div className="bg-emerald-500 rounded-r-full h-full w-[7%]" title="Contingency Reserve (7%)" />
                     </div>
-                    <div className="flex justify-between text-[10px] text-[var(--muted-foreground)]">
-                      <span>Catering (35%)</span>
-                      <span>Contingency Reserve (8%)</span>
+
+                    <div className="flex justify-between text-[10px] text-slate-500 dark:text-slate-400 font-medium">
+                      <span>Venue & Lodging (40%)</span>
+                      <span className="text-emerald-600 dark:text-emerald-400 font-semibold">Contingency Reserve (7% Locked)</span>
                     </div>
                   </div>
 
-                  {/* Mini Cards */}
-                  <div className="grid grid-cols-2 gap-2 pt-2">
-                    <div className="rounded-lg border border-[var(--border)] p-2.5 bg-[var(--secondary)]/40">
-                      <span className="text-[10px] uppercase text-[var(--muted-foreground)]">
-                        Timeline Status
-                      </span>
-                      <p className="text-xs font-semibold text-[var(--foreground)] flex items-center gap-1 mt-0.5">
-                        <Clock className="h-3.5 w-3.5 text-indigo-500" />
-                        T-48 Days (On Track)
-                      </p>
+                  {/* Micro metric badges */}
+                  <div className="grid grid-cols-2 gap-2.5">
+                    <div className="p-3 rounded-xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200/60 dark:border-white/5">
+                      <div className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
+                        <CalendarDays className="h-3.5 w-3.5 text-indigo-500" />
+                        <span>Timeline Schedule</span>
+                      </div>
+                      <p className="font-heading font-bold text-sm text-slate-900 dark:text-white mt-1">T-120 Days</p>
+                      <p className="text-[10px] text-emerald-600 dark:text-emerald-400 font-medium">On track for vendor freeze</p>
                     </div>
-                    <div className="rounded-lg border border-[var(--border)] p-2.5 bg-[var(--secondary)]/40">
-                      <span className="text-[10px] uppercase text-[var(--muted-foreground)]">
-                        Safety Reserve
-                      </span>
-                      <p className="text-xs font-semibold text-emerald-600 flex items-center gap-1 mt-0.5">
-                        <ShieldCheck className="h-3.5 w-3.5" />
-                        ₹4,800 Buffer
-                      </p>
+
+                    <div className="p-3 rounded-xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200/60 dark:border-white/5">
+                      <div className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
+                        <Users2 className="h-3.5 w-3.5 text-violet-500" />
+                        <span>Guest List Health</span>
+                      </div>
+                      <p className="font-heading font-bold text-sm text-slate-900 dark:text-white mt-1">350 Tracked</p>
+                      <p className="text-[10px] text-indigo-600 dark:text-indigo-400 font-medium">Zero-PII local encryption</p>
                     </div>
                   </div>
 
-                  {/* AI Explainable Card Mock */}
-                  <div className="rounded-lg border border-indigo-500/20 bg-indigo-500/5 p-3 text-xs space-y-1">
-                    <div className="flex items-center gap-1.5 font-semibold text-indigo-600 dark:text-indigo-400">
-                      <Sparkles className="h-3.5 w-3.5" />
-                      <span>Explainable AI Recommendation</span>
+                  {/* Explainable AI callout */}
+                  <div className="p-3 rounded-xl bg-indigo-500/5 dark:bg-indigo-500/10 border border-indigo-500/20 text-xs">
+                    <div className="flex items-center gap-1.5 text-indigo-700 dark:text-indigo-300 font-bold mb-1">
+                      <Lightbulb className="h-3.5 w-3.5 text-indigo-500" />
+                      <span>Explainable AI Strategy</span>
                     </div>
-                    <p className="text-[11px] text-[var(--muted-foreground)]">
-                      Live street food counters chosen over seated dinner to reduce labor cost by 22%
-                      while boosting guest energy.
+                    <p className="text-slate-600 dark:text-slate-300 text-[11px] leading-relaxed">
+                      Catering optimized to live Rajasthani food counters to reduce banquet labor overhead by 22% while boosting guest culinary interaction.
                     </p>
                   </div>
                 </div>
@@ -156,269 +178,207 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* How It Works (3 Steps) */}
-      <section className="py-16 sm:py-20 bg-[var(--card)] border-y border-[var(--border)]">
+      {/* Celebration Archetypes Section */}
+      <section className="py-16 sm:py-24 border-t border-slate-200/80 dark:border-white/10 bg-slate-50/50 dark:bg-black/20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <h2 className="text-3xl font-bold tracking-tight text-[var(--foreground)]">
-              How Gatherly AI Works
+          <div className="text-center max-w-3xl mx-auto space-y-4 mb-14">
+            <h2 className="font-heading text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
+              Versatile Celebration Domains
             </h2>
-            <p className="text-sm sm:text-base text-[var(--muted-foreground)] mt-2">
-              Three seamless steps from initial dream to flawless day-of celebration.
+            <p className="font-heading text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+              Tailored Intelligence for Every Occasion
+            </p>
+            <p className="text-base text-slate-600 dark:text-slate-400">
+              Each event type leverages specialized industry formulas, venue lead times, and seasonal risk patterns.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="rounded-xl border border-[var(--border)] p-6 bg-[var(--background)] space-y-3">
-              <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600 text-white font-bold text-lg">
-                1
-              </span>
-              <h3 className="text-lg font-bold text-[var(--foreground)]">Define Your Parameters</h3>
-              <p className="text-sm text-[var(--muted-foreground)]">
-                Input your event type, guest headcount, location tier, budget, and top priority
-                categories in our keyboard-friendly wizard.
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+            {/* Wedding Card */}
+            <div className="glass-card rounded-2xl p-6 space-y-4">
+              <div className="h-12 w-12 rounded-xl bg-gradient-to-tr from-rose-500 to-amber-500 flex items-center justify-center text-white shadow-md shadow-rose-500/20">
+                <Crown className="h-6 w-6" />
+              </div>
+              <div>
+                <span className="text-xs font-bold text-rose-600 dark:text-rose-400 uppercase tracking-wider">Dream Weddings</span>
+                <h3 className="font-heading text-xl font-bold text-slate-900 dark:text-white mt-1">Multi-day & Nuptial Banquets</h3>
+              </div>
+              <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                Manages multi-function schedules (Mehendi, Sangeet, Reception), high-capacity catering allocations, and mandatory 7% contingency reserve shielding you from vendor price shocks.
               </p>
+              <div className="pt-2 border-t border-slate-200/60 dark:border-white/5 flex items-center justify-between text-xs font-semibold text-slate-700 dark:text-slate-300">
+                <span>Scale: 50 to 1,500+ guests</span>
+                <span className="text-rose-600 dark:text-rose-400">T-180d Timeline</span>
+              </div>
             </div>
 
-            <div className="rounded-xl border border-[var(--border)] p-6 bg-[var(--background)] space-y-3">
-              <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600 text-white font-bold text-lg">
-                2
-              </span>
-              <h3 className="text-lg font-bold text-[var(--foreground)]">
-                Hybrid Intelligence Engine
-              </h3>
-              <p className="text-sm text-[var(--muted-foreground)]">
-                Deterministic algorithms guarantee 100% budget sums with built-in contingency, while
-                Gemini 2.5 Flash layers contextual reasoning.
+            {/* Birthday Card */}
+            <div className="glass-card rounded-2xl p-6 space-y-4">
+              <div className="h-12 w-12 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-500 flex items-center justify-center text-white shadow-md shadow-indigo-500/20">
+                <Cake className="h-6 w-6" />
+              </div>
+              <div>
+                <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">Milestone Birthdays</span>
+                <h3 className="font-heading text-xl font-bold text-slate-900 dark:text-white mt-1">1st to 80th Milestone Bashes</h3>
+              </div>
+              <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                Interactive theme selector (Neon Retro, Bohemian Chic, Minimalist Garden) with high-energy entertainment, live cake tasting deadlines, and rush lead-time compression.
               </p>
+              <div className="pt-2 border-t border-slate-200/60 dark:border-white/5 flex items-center justify-between text-xs font-semibold text-slate-700 dark:text-slate-300">
+                <span>Scale: 15 to 250 guests</span>
+                <span className="text-indigo-600 dark:text-indigo-400">T-30d Timeline</span>
+              </div>
             </div>
 
-            <div className="rounded-xl border border-[var(--border)] p-6 bg-[var(--background)] space-y-3">
-              <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600 text-white font-bold text-lg">
-                3
-              </span>
-              <h3 className="text-lg font-bold text-[var(--foreground)]">Manage & Adapt</h3>
-              <p className="text-sm text-[var(--muted-foreground)]">
-                Dynamic workspace adapts in real-time to budget cuts, guest count surges, or date
-                shifts with transparent before/after diffs.
+            {/* Community Event Card */}
+            <div className="glass-card rounded-2xl p-6 space-y-4">
+              <div className="h-12 w-12 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-500 flex items-center justify-center text-white shadow-md shadow-emerald-500/20">
+                <TreePine className="h-6 w-6" />
+              </div>
+              <div>
+                <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">Community Festivals</span>
+                <h3 className="font-heading text-xl font-bold text-slate-900 dark:text-white mt-1">Eco-Fairs, Galas & Bazaars</h3>
+              </div>
+              <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                Prioritizes municipal permits, audio-visual sound limits, crowd security buffers, and automated monsoon rain contingency planning with generator backups.
               </p>
+              <div className="pt-2 border-t border-slate-200/60 dark:border-white/5 flex items-center justify-between text-xs font-semibold text-slate-700 dark:text-slate-300">
+                <span>Scale: 100 to 2,000 attendees</span>
+                <span className="text-emerald-600 dark:text-emerald-400">Permit Centric</span>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Bento Grid Features */}
-      <section className="py-16 sm:py-24 bg-[var(--background)]">
+      {/* Architectural Bento Grid */}
+      <section className="py-16 sm:py-24 border-t border-slate-200/80 dark:border-white/10">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-14">
-            <h2 className="text-3xl font-bold tracking-tight text-[var(--foreground)]">
-              Engineered for Real-World Celebrations
+          <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
+            <h2 className="font-heading text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
+              Engineering Rigor
             </h2>
-            <p className="text-sm sm:text-base text-[var(--muted-foreground)] mt-2">
-              Every feature solves actual event organizer stress points.
+            <p className="font-heading text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+              Why Planners Trust Gatherly AI
+            </p>
+            <p className="text-base text-slate-600 dark:text-slate-400">
+              We eliminated LLM hallucinations by coupling pure deterministic mathematics with contextual generative reasoning.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Bento 1: Exact 100% Budgeting */}
-            <div className="md:col-span-2 rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6 sm:p-8 space-y-3">
-              <div className="h-10 w-10 rounded-lg bg-indigo-500/10 text-indigo-600 flex items-center justify-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Bento 1: 100% Math Invariant */}
+            <div className="glass-card rounded-2xl p-6 space-y-3">
+              <div className="h-10 w-10 rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
                 <PieChart className="h-5 w-5" />
               </div>
-              <h3 className="text-xl font-bold text-[var(--foreground)]">
-                Deterministic 100% Budgeting Invariant
+              <h3 className="font-heading text-lg font-bold text-slate-900 dark:text-white">
+                Deterministic 100% Budget Invariant
               </h3>
-              <p className="text-sm text-[var(--muted-foreground)]">
-                Unlike vague LLM estimates, our mathematical allocator guarantees every single rupee
-                or dollar is accounted for. A mandatory 5% to 10% safety contingency buffer protects
-                you from day-of financial shocks.
+              <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                Every rupee is mathematically accounted for. Never throws hallucinated arithmetic summing to 125%. Locks a non-negotiable 5–10% contingency safety reserve.
               </p>
             </div>
 
-            {/* Bento 2: Explainable AI */}
-            <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6 sm:p-8 space-y-3">
-              <div className="h-10 w-10 rounded-lg bg-violet-500/10 text-violet-600 flex items-center justify-center">
-                <Sparkles className="h-5 w-5" />
+            {/* Bento 2: Backwards Timelines */}
+            <div className="glass-card rounded-2xl p-6 space-y-3">
+              <div className="h-10 w-10 rounded-xl bg-violet-500/10 text-violet-600 dark:text-violet-400 flex items-center justify-center">
+                <CalendarDays className="h-5 w-5" />
               </div>
-              <h3 className="text-xl font-bold text-[var(--foreground)]">
-                Explainable AI Architecture
+              <h3 className="font-heading text-lg font-bold text-slate-900 dark:text-white">
+                Backwards Milestone Timeline
               </h3>
-              <p className="text-sm text-[var(--muted-foreground)]">
-                Every suggestion comes with recommendation, reasoning, expected impact, and
-                evaluated alternatives rather than an unexplained black box.
+              <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                Schedules deadlines backwards from the event date. If lead time is under 14 days, algorithms automatically compress milestones and flag rush vendor tasks.
               </p>
             </div>
 
-            {/* Bento 3: Backwards Milestones */}
-            <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6 sm:p-8 space-y-3">
-              <div className="h-10 w-10 rounded-lg bg-pink-500/10 text-pink-600 flex items-center justify-center">
-                <Clock className="h-5 w-5" />
+            {/* Bento 3: Explainable Decisions */}
+            <div className="glass-card rounded-2xl p-6 space-y-3">
+              <div className="h-10 w-10 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center">
+                <Lightbulb className="h-5 w-5" />
               </div>
-              <h3 className="text-xl font-bold text-[var(--foreground)]">
-                Backwards Milestone Schedule
+              <h3 className="font-heading text-lg font-bold text-slate-900 dark:text-white">
+                Explainable Decision Cards
               </h3>
-              <p className="text-sm text-[var(--muted-foreground)]">
-                Reverse-engineered schedules (T-90, T-60, T-30, day-of) automatically compress and
-                flag urgent tasks if planning on short notice.
+              <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                No black-box recommendations. Every suggestion includes rationale, financial trade-offs, estimated savings, and evaluated fallback alternatives.
               </p>
             </div>
 
             {/* Bento 4: Zero-PII Privacy */}
-            <div className="md:col-span-2 rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6 sm:p-8 space-y-3">
-              <div className="h-10 w-10 rounded-lg bg-emerald-500/10 text-emerald-600 flex items-center justify-center">
-                <ShieldCheck className="h-5 w-5" />
+            <div className="glass-card rounded-2xl p-6 space-y-3">
+              <div className="h-10 w-10 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+                <Lock className="h-5 w-5" />
               </div>
-              <h3 className="text-xl font-bold text-[var(--foreground)]">
-                Zero Guest PII Transmitted to AI
+              <h3 className="font-heading text-lg font-bold text-slate-900 dark:text-white">
+                Zero-PII Privacy Architecture
               </h3>
-              <p className="text-sm text-[var(--muted-foreground)]">
-                Your guest names, contact numbers, and dietary requirements are strictly confined to
-                your browser&apos;s local storage. Zero personal attendee data is ever transmitted to
-                any external LLM provider.
+              <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                Guest names, phone numbers, and dietary requirements live strictly in your browser&apos;s LocalStorage. Never transmitted to third-party AI models.
+              </p>
+            </div>
+
+            {/* Bento 5: Contextual Weather & Risks */}
+            <div className="glass-card rounded-2xl p-6 space-y-3">
+              <div className="h-10 w-10 rounded-xl bg-rose-500/10 text-rose-600 dark:text-rose-400 flex items-center justify-center">
+                <AlertTriangle className="h-5 w-5" />
+              </div>
+              <h3 className="font-heading text-lg font-bold text-slate-900 dark:text-white">
+                Contextual Risk Analysis
+              </h3>
+              <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                Detects monsoon weather exposure, budget-per-guest tier discrepancies, and tight lead times before they compromise your celebration.
+              </p>
+            </div>
+
+            {/* Bento 6: Universal Calendar Export */}
+            <div className="glass-card rounded-2xl p-6 space-y-3">
+              <div className="h-10 w-10 rounded-xl bg-teal-500/10 text-teal-600 dark:text-teal-400 flex items-center justify-center">
+                <FileDown className="h-5 w-5" />
+              </div>
+              <h3 className="font-heading text-lg font-bold text-slate-900 dark:text-white">
+                RFC 5545 iCalendar Sync
+              </h3>
+              <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                One-click export to Google Calendar, Apple Calendar, and Microsoft Outlook. Plus complete JSON backup portability at any time.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Illustrative Testimonials */}
-      <section className="py-16 bg-[var(--card)] border-y border-[var(--border)]">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="text-xs font-semibold uppercase tracking-wider text-indigo-600">
-              User Personas
-            </span>
-            <h2 className="text-3xl font-bold tracking-tight text-[var(--foreground)] mt-1">
-              Celebrated by Diverse Organizers
-            </h2>
-            <p className="text-xs text-[var(--muted-foreground)] mt-1">
-              (Illustrative user personas reflecting actual testing workflows)
-            </p>
+      {/* CTA Section */}
+      <section className="py-16 sm:py-24 border-t border-slate-200/80 dark:border-white/10 bg-gradient-to-b from-indigo-500/5 via-transparent to-transparent">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center space-y-8">
+          <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-4 py-1.5 text-xs font-semibold text-indigo-700 dark:text-indigo-300">
+            <Sparkles className="h-3.5 w-3.5" />
+            <span>Ready in under 2 minutes • Zero credit card</span>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="rounded-xl border border-[var(--border)] p-6 bg-[var(--background)] space-y-3">
-              <p className="text-sm text-[var(--muted-foreground)] italic">
-                &ldquo;When we had to trim our wedding budget from 25L to 20L, Gatherly AI didn&apos;t
-                just slash everything blindly. It showed a clear before/after diff that protected our
-                catering while finding savings in floral rentals.&rdquo;
-              </p>
-              <div className="pt-2">
-                <p className="text-xs font-bold text-[var(--foreground)]">Aarav & Meera</p>
-                <p className="text-[11px] text-[var(--muted-foreground)]">
-                  Newlyweds • Udaipur Heritage Wedding
-                </p>
-              </div>
-            </div>
-
-            <div className="rounded-xl border border-[var(--border)] p-6 bg-[var(--background)] space-y-3">
-              <p className="text-sm text-[var(--muted-foreground)] italic">
-                &ldquo;30 extra friends RSVPed to Priya&apos;s 30th birthday at the last minute. The
-                guest surge assistant immediately flagged the per-plate compression and gave me the
-                exact numbers to call the caterer with.&rdquo;
-              </p>
-              <div className="pt-2">
-                <p className="text-xs font-bold text-[var(--foreground)]">Rohan Sen</p>
-                <p className="text-[11px] text-[var(--muted-foreground)]">
-                  Host • Kolkata Birthday Party
-                </p>
-              </div>
-            </div>
-
-            <div className="rounded-xl border border-[var(--border)] p-6 bg-[var(--background)] space-y-3">
-              <p className="text-sm text-[var(--muted-foreground)] italic">
-                &ldquo;Planning a 500-attendee eco-fair requires ironclad contingency. Having an
-                automated backwards timeline export directly to .ics on my phone was an absolute
-                lifesaver.&rdquo;
-              </p>
-              <div className="pt-2">
-                <p className="text-xs font-bold text-[var(--foreground)]">Kavitha Nair</p>
-                <p className="text-[11px] text-[var(--muted-foreground)]">
-                  Coordinator • Bengaluru Cultural Festival
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="py-16 sm:py-20 bg-[var(--background)]">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 space-y-8">
-          <div className="text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-[var(--foreground)]">
-              Frequently Asked Questions
-            </h2>
-            <p className="text-sm text-[var(--muted-foreground)] mt-2">
-              Everything you need to know about our privacy and planning logic.
-            </p>
-          </div>
-
-          <div className="space-y-4">
-            <details className="group rounded-xl border border-[var(--border)] bg-[var(--card)] p-4 sm:p-5">
-              <summary className="flex cursor-pointer items-center justify-between font-semibold text-[var(--foreground)] text-sm sm:text-base list-none">
-                <span>Does Gatherly AI work without an API key or internet connection?</span>
-                <ChevronDown className="h-4 w-4 transition-transform group-open:rotate-180" />
-              </summary>
-              <p className="text-sm text-[var(--muted-foreground)] mt-3 leading-relaxed">
-                Yes! Gatherly AI is built with an offline-first deterministic rules engine. If no
-                Gemini API key is configured or the network fails, it automatically operates in Demo
-                Mode with full budgeting math, risk generation, and backwards schedules.
-              </p>
-            </details>
-
-            <details className="group rounded-xl border border-[var(--border)] bg-[var(--card)] p-4 sm:p-5">
-              <summary className="flex cursor-pointer items-center justify-between font-semibold text-[var(--foreground)] text-sm sm:text-base list-none">
-                <span>Are vendor recommendations actual sponsored listings?</span>
-                <ChevronDown className="h-4 w-4 transition-transform group-open:rotate-180" />
-              </summary>
-              <p className="text-sm text-[var(--muted-foreground)] mt-3 leading-relaxed">
-                No. In strict accordance with our honesty rules, Gatherly AI does not invent fake
-                verified vendor listings. The app clearly distinguishes user-entered vendors from
-                AI-suggested vendor TYPES (e.g., &ldquo;Boutique Heritage Courtyard Type&rdquo;) with
-                negotiation checklists.
-              </p>
-            </details>
-
-            <details className="group rounded-xl border border-[var(--border)] bg-[var(--card)] p-4 sm:p-5">
-              <summary className="flex cursor-pointer items-center justify-between font-semibold text-[var(--foreground)] text-sm sm:text-base list-none">
-                <span>Where is my event and guest data stored?</span>
-                <ChevronDown className="h-4 w-4 transition-transform group-open:rotate-180" />
-              </summary>
-              <p className="text-sm text-[var(--muted-foreground)] mt-3 leading-relaxed">
-                All event plans, guest lists, and budgets are saved purely inside your browser&apos;s
-                localStorage. We operate no cloud tracking databases. You can export everything as
-                JSON or use the &ldquo;Delete all data&rdquo; button in Settings for instant total
-                erasure.
-              </p>
-            </details>
-          </div>
-        </div>
-      </section>
-
-      {/* Final CTA */}
-      <section className="py-16 bg-indigo-600 text-white">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center space-y-6">
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
-            Every celebration deserves to be beautifully planned.
+          <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
+            Start Planning Your Celebration Today.
           </h2>
-          <p className="text-indigo-100 text-base max-w-xl mx-auto">
-            Test the live planner immediately with pre-loaded scenarios or craft your own custom
-            celebration in under two minutes.
+
+          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
+            Experience the peace of mind that comes with mathematically guaranteed budget allocation,
+            proactive risk prevention, and effortless vendor tracking.
           </p>
+
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
             <Link
               href="/onboarding"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg bg-white px-6 py-3.5 text-base font-semibold text-indigo-700 shadow-sm hover:bg-indigo-50 transition-colors"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-indigo-600 via-indigo-600 to-violet-600 px-8 py-4 text-base font-bold text-white shadow-xl shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all"
             >
-              <span>Start Planning Now</span>
+              <span>Launch Planning Wizard</span>
               <ArrowRight className="h-4 w-4" />
             </Link>
+
             <Link
               href="/dashboard"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg border border-white/40 bg-indigo-700 px-6 py-3.5 text-base font-semibold text-white hover:bg-indigo-800 transition-colors"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 dark:border-white/10 bg-white/80 dark:bg-white/[0.04] px-7 py-4 text-base font-semibold text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-all"
             >
-              <span>Explore Seeded Demos</span>
+              <span>Explore Judge Showcase</span>
             </Link>
           </div>
         </div>

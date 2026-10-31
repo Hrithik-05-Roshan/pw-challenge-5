@@ -244,7 +244,7 @@ export default function OnboardingPage() {
   const currencySymbol = currentCurrency === "INR" ? "₹" : currentCurrency === "USD" ? "$" : currentCurrency === "EUR" ? "€" : "£";
 
   return (
-    <div className="py-8 sm:py-12 px-4 sm:px-6 lg:px-10 max-w-7xl mx-auto ambient-bg w-full min-h-screen space-y-8">
+    <div className="py-6 sm:py-10 px-4 sm:px-6 lg:px-8 xl:px-12 max-w-7xl 2xl:max-w-[1520px] mx-auto ambient-bg w-full min-h-screen space-y-8">
       {/* ======================================================== */}
       {/* 1. TOP HEADER & INSPIRATION QUICK-LOAD BAR                */}
       {/* ======================================================== */}

@@ -200,7 +200,7 @@ html {
   justify-content: center;
 }
 
-@media (max-height: 700px) {
+@media (max-height: 800px) {
   .snap-page-section {
     min-height: auto;
     scroll-snap-align: none;

@@ -3,7 +3,6 @@ import { Playfair_Display, Plus_Jakarta_Sans, Outfit } from "next/font/google";
 import "./globals.css";
 import { SkipLink } from "@/components/layout/SkipLink";
 import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -92,7 +91,6 @@ export default function RootLayout({
           <main id="main-content" className="flex-1 focus:outline-none" tabIndex={-1}>
             {children}
           </main>
-          <Footer />
         </div>
       </body>
     </html>

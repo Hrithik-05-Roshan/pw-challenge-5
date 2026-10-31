@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import { Footer } from "@/components/layout/Footer";
 import {
   Sparkles,
   ArrowRight,
@@ -447,6 +448,9 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
+
+      {/* Footer exclusively on Home Page */}
+      <Footer />
     </div>
   );
 }

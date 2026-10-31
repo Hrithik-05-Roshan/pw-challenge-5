@@ -26,10 +26,20 @@ export function Navbar() {
     if (root.classList.contains("dark")) {
       root.classList.remove("dark");
       root.removeAttribute("data-theme");
+      try {
+        localStorage.setItem("gatherly-theme", "light");
+      } catch {
+        // storage disabled or unavailable
+      }
       setIsDark(false);
     } else {
       root.classList.add("dark");
       root.setAttribute("data-theme", "dark");
+      try {
+        localStorage.setItem("gatherly-theme", "dark");
+      } catch {
+        // storage disabled or unavailable
+      }
       setIsDark(true);
     }
   };

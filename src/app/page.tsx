@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Footer } from "@/components/layout/Footer";
 import {
   Sparkles,
-  ArrowRight,
+  ChevronRight,
   ShieldCheck,
   PieChart,
   CheckCircle2,
@@ -12,13 +12,11 @@ import {
   Crown,
   Cake,
   TreePine,
-  PartyPopper,
   FileDown,
   Lock,
   Lightbulb,
   AlertTriangle,
   Users2,
-  Compass,
 } from "lucide-react";
 
 export default function LandingPage() {
@@ -94,22 +92,21 @@ export default function LandingPage() {
                 backwards milestone timelines, explainable vendor decisions, and absolute zero-PII guest privacy.
               </p>
 
-              {/* Primary CTAs */}
+              {/* Primary CTAs with '>' icon and hover effect */}
               <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
                 <Link
                   href="/onboarding"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-rose-600 px-8 py-4 text-sm font-bold text-white shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
+                  className="group w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-rose-600 px-8 py-4 text-sm sm:text-base font-bold text-white shadow-xl shadow-indigo-500/25 hover:shadow-2xl hover:shadow-indigo-500/40 hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 cursor-pointer"
                 >
-                  <PartyPopper className="h-4 w-4" aria-hidden="true" />
+                  <ChevronRight className="h-4.5 w-4.5 stroke-[2.5] transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
                   <span>Start Planning Wizard</span>
-                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
 
                 <Link
                   href="/dashboard"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-2xl border border-slate-200 dark:border-white/10 bg-white/90 dark:bg-white/[0.04] px-7 py-4 text-sm font-semibold text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-white/10 backdrop-blur-md hover:scale-[1.01] active:scale-[0.98] transition-all duration-300"
+                  className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-200 dark:border-white/10 bg-white/90 dark:bg-white/[0.04] px-7 py-4 text-sm sm:text-base font-semibold text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-white/10 backdrop-blur-md hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-sm cursor-pointer"
                 >
-                  <Compass className="h-4 w-4 text-indigo-500" aria-hidden="true" />
+                  <ChevronRight className="h-4 w-4 stroke-[2.5] text-indigo-500 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
                   <span>Explore Showcase Events</span>
                 </Link>
               </div>
@@ -409,13 +406,14 @@ export default function LandingPage() {
       </section>
 
       {/* ======================================================== */}
-      {/* SECTION 4: CALL TO ACTION (Snaps to full view)           */}
+      {/* SECTION 4: CALL TO ACTION & FOOTER (Snaps to full view)  */}
       {/* ======================================================== */}
       <section
         id="section-cta"
-        className="snap-page-section relative overflow-hidden px-4 sm:px-6 lg:px-8 py-16 lg:py-20 border-t border-slate-200/80 dark:border-white/10 bg-gradient-to-b from-indigo-500/5 via-transparent to-transparent"
+        className="snap-page-section relative overflow-hidden flex flex-col justify-between border-t border-slate-200/80 dark:border-white/10 bg-gradient-to-b from-indigo-500/5 via-transparent to-transparent"
       >
-        <div className="mx-auto max-w-5xl w-full text-center space-y-8">
+        {/* Top/Center: Elevated Celebration CTA Card */}
+        <div className="mx-auto max-w-5xl w-full text-center px-4 sm:px-6 lg:px-8 py-10 sm:py-14 space-y-6 my-auto">
           <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-4 py-1.5 text-xs font-semibold text-indigo-700 dark:text-indigo-300">
             <Sparkles className="h-3.5 w-3.5" />
             <span>Ready in under 2 minutes • 100% Free & Client-Side Secure</span>
@@ -425,32 +423,33 @@ export default function LandingPage() {
             Plan your next memorable moment.
           </h2>
 
-          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed">
             Experience the calm that comes with guaranteed 100% budget balance, 
             thoughtful vendor coordination, and backwards milestone clarity.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
             <Link
               href="/onboarding"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-rose-600 px-9 py-4 text-base font-bold text-white shadow-xl shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all"
+              className="group w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-rose-600 px-8 py-3.5 text-sm sm:text-base font-bold text-white shadow-xl shadow-indigo-500/25 hover:shadow-2xl hover:shadow-indigo-500/40 hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 cursor-pointer"
             >
+              <ChevronRight className="h-4.5 w-4.5 stroke-[2.5] transition-transform duration-300 group-hover:translate-x-1" />
               <span>Launch Planning Wizard</span>
-              <ArrowRight className="h-4 w-4" />
             </Link>
 
             <Link
               href="/dashboard"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-200 dark:border-white/10 bg-white/90 dark:bg-white/[0.04] px-8 py-4 text-base font-semibold text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-all"
+              className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-200 dark:border-white/10 bg-white/90 dark:bg-white/[0.04] px-7 py-3.5 text-sm sm:text-base font-semibold text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-white/10 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-sm cursor-pointer"
             >
+              <ChevronRight className="h-4 w-4 stroke-[2.5] text-indigo-500 transition-transform duration-300 group-hover:translate-x-1" />
               <span>Explore Judge Showcase</span>
             </Link>
           </div>
         </div>
-      </section>
 
-      {/* Footer exclusively on Home Page */}
-      <Footer />
+        {/* Bottom: Gatherly Footer cleanly docked at bottom of screen with balanced spacing */}
+        <Footer />
+      </section>
     </div>
   );
 }

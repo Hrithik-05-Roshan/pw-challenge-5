@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   Sparkles,
-  Plus,
+  ChevronRight,
   Moon,
   Sun,
   Menu,
@@ -100,12 +100,12 @@ export function Navbar() {
             </div>
           </Link>
 
-          {/* Quick CTA */}
+          {/* Quick CTA with '>' icon and hover effect */}
           <Link
-            href="/events/new"
-            className="w-full flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-rose-600 px-4 py-3.5 text-sm font-bold text-white shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/35 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200"
+            href="/onboarding"
+            className="group w-full flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-rose-600 px-4 py-3.5 text-sm font-bold text-white shadow-lg shadow-indigo-500/20 hover:shadow-xl hover:shadow-indigo-500/40 hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 cursor-pointer"
           >
-            <Plus className="h-4 w-4" aria-hidden="true" />
+            <ChevronRight className="h-4.5 w-4.5 stroke-[2.5] transition-transform duration-300 group-hover:translate-x-1 shrink-0" aria-hidden="true" />
             <span>Plan Celebration</span>
           </Link>
 
@@ -251,11 +251,11 @@ export function Navbar() {
               </div>
 
               <Link
-                href="/events/new"
+                href="/onboarding"
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-indigo-600 via-purple-600 to-rose-600 px-4 py-3 text-sm font-bold text-white shadow-md"
+                className="group w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-indigo-600 via-purple-600 to-rose-600 px-4 py-3 text-sm font-bold text-white shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
               >
-                <Plus className="h-4 w-4" />
+                <ChevronRight className="h-4 w-4 stroke-[2.5] transition-transform duration-300 group-hover:translate-x-1" />
                 <span>Plan Celebration</span>
               </Link>
 

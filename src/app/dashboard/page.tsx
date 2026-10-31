@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
   Clock,
-  Plus,
   Search,
   Trash2,
   Copy,
@@ -21,6 +20,7 @@ import {
   CheckCircle2,
   LayoutDashboard,
   ArrowRight,
+  ChevronRight,
   TrendingUp,
 } from "lucide-react";
 import { useEventStore } from "@/store/useEventStore";
@@ -95,10 +95,10 @@ export default function DashboardPage() {
         </div>
 
         <Link
-          href="/events/new"
-          className="inline-flex items-center justify-center gap-2.5 rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-rose-600 px-7 py-4 text-sm font-bold text-white shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 shrink-0"
+          href="/onboarding"
+          className="group inline-flex items-center justify-center gap-2.5 rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-rose-600 px-7 py-4 text-sm font-bold text-white shadow-lg shadow-indigo-500/25 hover:shadow-xl hover:shadow-indigo-500/40 hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 shrink-0 cursor-pointer"
         >
-          <Plus className="h-4 w-4" />
+          <ChevronRight className="h-4.5 w-4.5 stroke-[2.5] transition-transform duration-300 group-hover:translate-x-1" />
           <span>Plan Celebration</span>
         </Link>
       </div>
@@ -363,10 +363,10 @@ export default function DashboardPage() {
           </div>
           <p className="text-lg font-semibold text-slate-900 dark:text-white">No celebrations match your search criteria.</p>
           <Link
-            href="/events/new"
-            className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-rose-600 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-indigo-500/20"
+            href="/onboarding"
+            className="group inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-rose-600 px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-indigo-500/20 hover:shadow-xl hover:shadow-indigo-500/40 hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 cursor-pointer"
           >
-            <Plus className="h-4 w-4" />
+            <ChevronRight className="h-4 w-4 stroke-[2.5] transition-transform duration-300 group-hover:translate-x-1" />
             <span>Create New Celebration</span>
           </Link>
         </div>

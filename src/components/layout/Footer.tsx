@@ -6,7 +6,7 @@ import {
   Sparkles,
   ShieldCheck,
   Heart,
-  Send,
+  ChevronRight,
   CheckCircle2,
   Lock,
   CalendarDays,
@@ -27,10 +27,10 @@ export function Footer() {
   };
 
   return (
-    <footer className="w-full border-t border-slate-200/80 dark:border-white/10 bg-white/90 dark:bg-slate-950/90 backdrop-blur-xl mt-auto transition-colors duration-300" role="contentinfo">
-      <div className="mx-auto max-w-7xl px-6 py-12 sm:px-8 lg:px-12 space-y-12">
+    <footer className="w-full border-t border-slate-200/80 dark:border-white/10 bg-white/95 dark:bg-slate-950/95 backdrop-blur-xl mt-auto transition-colors duration-300" role="contentinfo">
+      <div className="mx-auto max-w-7xl px-6 py-8 sm:px-8 lg:px-12 space-y-8">
         {/* Top Segment: Brand, Tagline & Newsletter */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 pb-10 border-b border-slate-200/60 dark:border-white/5">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 pb-7 border-b border-slate-200/60 dark:border-white/5">
           {/* Brand & Mission */}
           <div className="lg:col-span-6 space-y-4">
             <Link href="/" className="inline-flex items-center gap-3 group">
@@ -94,9 +94,9 @@ export function Footer() {
                 />
                 <button
                   type="submit"
-                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-indigo-600 via-purple-600 to-rose-600 px-5 py-3 text-xs font-bold text-white shadow-md shadow-indigo-500/20 hover:shadow-indigo-500/35 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
+                  className="group inline-flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-indigo-600 via-purple-600 to-rose-600 px-5 py-3 text-xs font-bold text-white shadow-md shadow-indigo-500/20 hover:shadow-lg hover:shadow-indigo-500/40 hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 cursor-pointer shrink-0"
                 >
-                  <Send className="h-3.5 w-3.5" />
+                  <ChevronRight className="h-4 w-4 stroke-[2.5] transition-transform duration-300 group-hover:translate-x-1" />
                   <span>Subscribe</span>
                 </button>
               </form>

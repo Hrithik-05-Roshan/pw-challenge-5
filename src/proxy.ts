@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-export function middleware() {
+export function proxy() {
   const nonce = Buffer.from(crypto.randomUUID()).toString("base64");
   
   // CSP for production and local dev

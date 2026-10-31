@@ -88,10 +88,12 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-[var(--background)] text-[var(--foreground)] selection:bg-indigo-500 selection:text-white font-sans transition-colors duration-300">
         <SkipLink />
         <Navbar />
-        <main id="main-content" className="flex-1 focus:outline-none" tabIndex={-1}>
-          {children}
-        </main>
-        <Footer />
+        <div className="md:pl-64 lg:pl-72 flex-1 flex flex-col min-h-screen pt-16 md:pt-0">
+          <main id="main-content" className="flex-1 focus:outline-none" tabIndex={-1}>
+            {children}
+          </main>
+          <Footer />
+        </div>
       </body>
     </html>
   );

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4f46e5" />
+      <stop offset="50%" stop-color="#7c3aed" />
+      <stop offset="100%" stop-color="#db2777" />
+    </linearGradient>
+    <linearGradient id="sparkle" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#fde047" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="1" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  <!-- Background Pill -->
+  <rect width="32" height="32" rx="8" fill="url(#bg)" />
+  <!-- Center Celebration Star -->
+  <path d="M16 6C16.5 11 17.5 14.5 22.5 15C17.5 15.5 16.5 19 16 24C15.5 19 14.5 15.5 9.5 15C14.5 14.5 15.5 11 16 6Z" fill="url(#sparkle)" filter="url(#glow)" />
+  <!-- Accent Mini Star -->
+  <circle cx="23" cy="9" r="1.5" fill="#fde047" />
+  <circle cx="10" cy="22" r="1" fill="#ffffff" />
+</svg>

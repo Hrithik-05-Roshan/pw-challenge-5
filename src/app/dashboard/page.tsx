@@ -80,24 +80,24 @@ export default function DashboardPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 text-xs font-semibold mb-2">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 text-xs font-semibold mb-3">
             <LayoutDashboard className="h-3.5 w-3.5" />
-            <span>Interactive Control Center</span>
+            <span>Celebration Orchestration Studio</span>
           </div>
-          <h1 className="font-heading text-3xl sm:text-4xl font-black tracking-tight text-slate-900 dark:text-white">
-            Celebration Workspace Dashboard
+          <h1 className="font-editorial text-3xl sm:text-5xl font-bold tracking-tight text-slate-900 dark:text-white">
+            Your Celebration Workspaces
           </h1>
-          <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
-            Monitor all your celebrations, deterministic budgets, backwards timelines, and explainable AI models.
+          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 mt-2 max-w-2xl">
+            Bespoke event portfolios, guaranteed 100% mathematical budgets, backwards timelines, and explainable decision architecture.
           </p>
         </div>
 
         <Link
           href="/events/new"
-          className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-600 via-indigo-600 to-violet-600 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all"
+          className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-rose-600 px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all"
         >
           <Plus className="h-4 w-4" />
-          <span>New Celebration</span>
+          <span>Plan Celebration</span>
         </Link>
       </div>
 

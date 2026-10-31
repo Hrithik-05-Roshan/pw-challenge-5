@@ -116,8 +116,8 @@ export default function OnboardingPage() {
             <Sparkles className="h-3.5 w-3.5" />
             <span>Interactive Planning Wizard</span>
           </div>
-          <h1 className="font-heading text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
-            Create Your Celebration
+          <h1 className="font-editorial text-3xl sm:text-5xl font-bold text-slate-900 dark:text-white tracking-tight">
+            Design Your Celebration
           </h1>
         </div>
 

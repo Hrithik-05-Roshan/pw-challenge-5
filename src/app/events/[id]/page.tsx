@@ -245,7 +245,7 @@ export default function EventWorkspacePage() {
               </span>
             </div>
 
-            <h1 className="font-heading text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
+            <h1 className="font-editorial text-3xl sm:text-5xl font-bold text-slate-900 dark:text-white tracking-tight">
               {event.title}
             </h1>
             <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium">
@@ -382,7 +382,7 @@ export default function EventWorkspacePage() {
       {/* TAB CONTENT: OVERVIEW */}
       {/* ========================================== */}
       {activeTab === "overview" && (
-        <div className="space-y-6">
+        <div className="space-y-6 tab-content-active">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Health & Readiness Card */}
             <div className="glass-card rounded-2xl p-6 space-y-4">

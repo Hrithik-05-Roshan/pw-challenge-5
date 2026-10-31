@@ -72,11 +72,11 @@ export default function NewEventPage() {
           <Sparkles className="h-3.5 w-3.5" />
           <span>Instant Workspace Provisioning</span>
         </div>
-        <h1 className="font-heading text-3xl sm:text-4xl font-black tracking-tight text-slate-900 dark:text-white">
-          Launch New Celebration
+        <h1 className="font-editorial text-3xl sm:text-5xl font-bold tracking-tight text-slate-900 dark:text-white">
+          Plan a New Celebration
         </h1>
-        <p className="text-sm text-slate-600 dark:text-slate-400">
-          Instantly generates a mathematically balanced 100% budget, backwards milestone timeline, and contextual risk plan.
+        <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400">
+          Craft a bespoke celebration with mathematically balanced 100% budget math, backwards timelines, and vendor coordination.
         </p>
       </div>
 

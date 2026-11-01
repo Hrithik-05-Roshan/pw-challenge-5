@@ -81,26 +81,28 @@ export interface DateChangeResult {
  * @param priorities - User-selected priority areas
  * @returns Array of BudgetItem line items summing to totalBudget
  */
-export function calculateBudgetAllocation(
-  eventType: EventType,
-  totalBudget: number,
-  guestCount: number,
-  cityTier: CityTier = 2,
-  priorities: Priority[] = ["balanced"]
-): BudgetItem[] {
-  // Clone base percentage weights for event type
-  const basePercentagesSource = BASE_PERCENTAGES[eventType] || BASE_PERCENTAGES.other;
-  const base: Record<BudgetCategory, number> = { ...basePercentagesSource };
-
-  // Adjust for high guest-count scale (scale catering & venue, decrease attire/decor slightly)
+/**
+ * Adjusts category weightings for high guest-count scale.
+ */
+function applyScaleAdjustments(
+  base: Record<BudgetCategory, number>,
+  guestCount: number
+): void {
   if (guestCount > SCALE_THRESHOLDS.HIGH_SCALE_GUEST_THRESHOLD) {
     base.catering += 4;
     base.venue += 2;
     base.decoration = Math.max(5, base.decoration - 3);
     base.entertainment = Math.max(5, base.entertainment - 3);
   }
+}
 
-  // Adjust for City Tier: Tier 1 (Metros) have higher venue & catering baseline
+/**
+ * Calibrates category weights based on city economic tier.
+ */
+function applyCityTierAdjustments(
+  base: Record<BudgetCategory, number>,
+  cityTier: CityTier
+): void {
   if (cityTier === 1) {
     base.venue += 3;
     base.decoration = Math.max(5, base.decoration - 3);
@@ -108,8 +110,15 @@ export function calculateBudgetAllocation(
     base.venue = Math.max(15, base.venue - 4);
     base.contingency = Math.min(CONTINGENCY_BOUNDS.MAX_PERCENT, base.contingency + 4);
   }
+}
 
-  // Adjust for user priorities
+/**
+ * Dynamically reweights categories according to user preferences.
+ */
+function applyPriorityAdjustments(
+  base: Record<BudgetCategory, number>,
+  priorities: Priority[]
+): void {
   for (const prio of priorities) {
     if (prio === "catering") {
       base.catering += PRIORITY_BOOST_PERCENTAGE;
@@ -133,20 +142,25 @@ export function calculateBudgetAllocation(
       base.decoration = Math.max(5, base.decoration - PRIORITY_OFFSET_DECOR_DECREASE);
     }
   }
+}
 
-  // Enforce contingency invariant between 5% and 10%
+/**
+ * Enforces contingency bounds and normalizes remaining category percentages to exactly 100%.
+ */
+function normalizePercentages(
+  base: Record<BudgetCategory, number>
+): Record<BudgetCategory, number> {
   const targetContingency = Math.max(
     CONTINGENCY_BOUNDS.MIN_PERCENT,
     Math.min(CONTINGENCY_BOUNDS.MAX_PERCENT, base.contingency)
   );
   base.contingency = targetContingency;
 
-  // Normalize other categories so that (sum of others) equals (100 - targetContingency)
   const otherCategories = (Object.keys(base) as BudgetCategory[]).filter((c) => c !== "contingency");
   const otherTotal = otherCategories.reduce((sum, cat) => sum + base[cat], 0);
   const remainingPercentTarget = 100 - targetContingency;
 
-  const normalizedPercentages: Record<BudgetCategory, number> = {} as Record<BudgetCategory, number>;
+  const normalizedPercentages = {} as Record<BudgetCategory, number>;
   normalizedPercentages.contingency = targetContingency;
 
   let runningOtherPercent = 0;
@@ -160,11 +174,19 @@ export function calculateBudgetAllocation(
     }
   });
 
-  const categories = Object.keys(base) as BudgetCategory[];
+  return normalizedPercentages;
+}
 
-  // Convert percentages into actual amounts, ensuring the sum of amounts === totalBudget exactly
+/**
+ * Converts percentages into exact integer units ensuring sum === totalBudget.
+ */
+function convertPercentagesToBudgetItems(
+  totalBudget: number,
+  normalizedPercentages: Record<BudgetCategory, number>,
+  categories: BudgetCategory[]
+): BudgetItem[] {
   let runningAmount = 0;
-  const items: BudgetItem[] = categories.map((cat, idx) => {
+  return categories.map((cat, idx) => {
     let amount: number;
     if (idx === categories.length - 1) {
       amount = totalBudget - runningAmount;
@@ -183,8 +205,43 @@ export function calculateBudgetAllocation(
       notes: `${normalizedPercentages[cat]}% of total allocation`,
     };
   });
+}
 
-  return items;
+/**
+ * Calculates a deterministic, invariant-satisfying budget allocation.
+ *
+ * Guarantees:
+ * 1. Category amounts sum exactly to 100% of the total budget to the last integer unit.
+ * 2. Contingency is strictly bounded between 5% and 10%.
+ * 3. Priorities and city tiers dynamically calibrate category distributions.
+ *
+ * @pure
+ * @complexity Time: O(K) where K is constant number of budget categories (10), Space: O(K)
+ * @param eventType - Classification of the event
+ * @param totalBudget - Total available budget in event currency
+ * @param guestCount - Number of anticipated attendees
+ * @param cityTier - Economic city tier (1 = Metro, 2 = Major, 3 = Regional)
+ * @param priorities - User-selected priority areas
+ * @returns Array of BudgetItem line items summing to totalBudget
+ */
+export function calculateBudgetAllocation(
+  eventType: EventType,
+  totalBudget: number,
+  guestCount: number,
+  cityTier: CityTier = 2,
+  priorities: Priority[] = ["balanced"]
+): BudgetItem[] {
+  const basePercentagesSource = BASE_PERCENTAGES[eventType] || BASE_PERCENTAGES.other;
+  const base: Record<BudgetCategory, number> = { ...basePercentagesSource };
+
+  applyScaleAdjustments(base, guestCount);
+  applyCityTierAdjustments(base, cityTier);
+  applyPriorityAdjustments(base, priorities);
+
+  const normalizedPercentages = normalizePercentages(base);
+  const categories = Object.keys(base) as BudgetCategory[];
+
+  return convertPercentagesToBudgetItems(totalBudget, normalizedPercentages, categories);
 }
 
 /**

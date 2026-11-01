@@ -90,24 +90,38 @@ All algorithmic planning functions (`calculateBudgetAllocation`, `handleBudgetRe
 | **TypeScript Errors** | 0 | **0 Errors** | `npm run typecheck` |
 | **TypeScript Strict Flags** | Enabled | `noImplicitReturns`, `noFallthroughCasesInSwitch`, `forceConsistentCasingInFileNames` | `tsconfig.json` |
 | **ESLint Problems** | 0 | **0 Errors, 0 Warnings** | `npm run lint` |
+| **Component Modularity** | < 250 LOC / file | **100% Compliant (All components < 250 LOC)** | AST Static Analysis |
+| **Next.js Error Boundaries**| Root & App recovery | **`error.tsx` & `global-error.tsx` implemented** | Next.js 16 App Router |
 | **Unit & AI Benchmark Tests** | 39 / 39 | **100% Pass Rate (39 passed)** | `npm test` |
-| **Repository Tracked Size** | < 5.0 MB | **0.68 MB (7.3x smaller than limit)** | `npm run size-check` |
+| **Repository Tracked Size** | < 5.0 MB | **0.71 MB (7.0x smaller than limit)** | `npm run size-check` |
 | **Production Build** | 0 warnings | **0 warnings** | `npm run build` |
 
 ---
 
 ## 📂 5. Directory Structure & Single Responsibility
 
+Gatherly AI adheres strictly to the Single Responsibility Principle (SRP). Large monolithic views have been decomposed into dedicated, cohesive sub-components each strictly under 250 lines of code:
+
 ```
 src/
-├── app/                              # Next.js App Router Pages & API
+├── app/                              # Next.js App Router Pages, Boundaries & API
 │   ├── api/plan/route.ts             # POST /api/plan handler with defensive validation
-│   ├── dashboard/page.tsx            # Event overview & scenario loader
+│   ├── dashboard/page.tsx            # Modular dashboard view controller (<105 lines)
 │   ├── events/[id]/page.tsx          # Decomposed Event Workspace (<250 lines)
-│   ├── onboarding/page.tsx           # Multi-step plan wizard
+│   ├── onboarding/page.tsx           # Multi-step plan wizard controller (<240 lines)
+│   ├── page.tsx                      # Landing page composition root (<45 lines)
+│   ├── error.tsx                     # App-level error boundary with WCAG recovery UI
+│   ├── global-error.tsx              # Root HTML shell failure boundary
 │   ├── globals.css                   # Tailwind v4 & WCAG accessibility styles
 │   └── proxy.ts                      # Strict Content-Security-Policy proxy
-├── components/                       # Modular UI Components
+├── components/                       # Modular UI Components (<250 LOC each)
+│   ├── dashboard/                    # Decomposed Dashboard Components
+│   │   ├── DashboardHeader.tsx       # Header banner & event counter
+│   │   ├── DashboardStatsGrid.tsx    # Aggregate KPI statistics grid
+│   │   ├── DashboardJudgeScenarios.tsx# Instant benchmark test scenario injector
+│   │   ├── DashboardToolbar.tsx      # Search, tier filter, status filter, sort bar
+│   │   ├── DashboardEventCard.tsx    # Interactive event card with action menu & delete confirmation
+│   │   └── DashboardEmptyState.tsx   # Zero-state call-to-action placeholder
 │   ├── events/                       # Single-Responsibility Workspace Tabs
 │   │   ├── EventWorkspaceHeader.tsx  # Title, classification badge, export (.ICS/JSON/Print)
 │   │   ├── EventMetricsBar.tsx       # Countdown, budget, guest count, readiness score
@@ -119,12 +133,32 @@ src/
 │   │   ├── RisksTab.tsx              # Contextual likelihood & severity risk matrix
 │   │   ├── EventIdeasTab.tsx         # Thematic concepts, menus, activities, playlists
 │   │   ├── AIArchitectTab.tsx        # Interactive planner assistant with fallback
-│   │   └── BudgetReallocationModal.tsx # Before/after transparent budget shock diff
-│   └── layout/                       # Global Layout Components
-│       ├── Navbar.tsx                # Accessible navigation bar
-│       ├── Footer.tsx                # Production-grade responsive footer
-│       └── SkipLink.tsx              # WCAG 2.2 AA keyboard skip link
+│   │   └── BudgetReallocationModal.tsx# Before/after transparent budget shock diff
+│   ├── landing/                      # Decomposed Landing Page Modules
+│   │   ├── LandingGalleryNav.tsx     # Quick anchor jump bar with active state indicator
+│   │   ├── LandingHero.tsx           # Value proposition, trust badges, primary CTA
+│   │   ├── LandingStudioPreview.tsx  # Live interactive simulation preview
+│   │   ├── LandingArchetypes.tsx     # Pre-configured event tier archetypes showcase
+│   │   ├── LandingArchitecture.tsx   # Engineering specification & architectural transparency
+│   │   └── LandingCta.tsx            # Final conversion callout
+│   ├── layout/                       # Global Layout Components
+│   │   ├── footer/                   # Decomposed Production Footer
+│   │   │   ├── FooterNewsletter.tsx  # Accessible newsletter subscription with feedback
+│   │   │   ├── FooterDirectory.tsx   # Data-driven link directory across all sections
+│   │   │   └── FooterBottomBar.tsx   # Copyright, legal links, operational status badge
+│   │   ├── Footer.tsx                # Composite root footer (<30 lines)
+│   │   ├── Navbar.tsx                # Accessible navigation bar with mobile drawer
+│   │   └── SkipLink.tsx              # WCAG 2.2 AA keyboard skip link
+│   └── onboarding/                   # Decomposed Onboarding Wizard Components
+│       ├── LiveBlueprintStudio.tsx   # Sticky reactive real-time blueprint preview card
+│       ├── OnboardingHeader.tsx      # Wizard title, archetype selector, close navigation
+│       ├── OnboardingStepper.tsx     # 4-step progress stepper with status indicators
+│       ├── Step1Fundamentals.tsx     # Title, event type, date, city tier form
+│       ├── Step2ScaleBudget.tsx      # Budget slider, guest count, presets, density gauge
+│       ├── Step3PrioritiesAesthetics.tsx# Priority weight ranking & design archetype selection
+│       └── Step4InvariantsReview.tsx # Final pre-generation invariant verification checklist
 ├── constants/                        # Centralized Configuration (Zero Magic Numbers)
+│   ├── onboarding.ts                 # Onboarding presets, archetypes, and form metadata
 │   └── planner.ts                    # Thresholds, multipliers, category splits, milestones
 ├── lib/                              # Core Domain & Infrastructure Libraries
 │   ├── ai/provider.ts                # Gemini Live AI service with deterministic fallback
